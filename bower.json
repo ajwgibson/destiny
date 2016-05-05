@@ -1,0 +1,6 @@
+{
+  "name": "destiny",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
