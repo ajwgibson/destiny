@@ -17,7 +17,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
-  app_path().'/helpers',
+    app_path().'/helpers',
 
 ));
 
@@ -50,6 +50,12 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+});
+
+App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
+{
+    Log::error($exception);
+    return Response::view('errors.404', array(), 404);
 });
 
 /*
