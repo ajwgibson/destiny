@@ -48,6 +48,8 @@ class OrderController extends BaseController {
             $order->verification_code = uniqid();
             $order->save();
 
+            Session::put('transaction_id', $order->transaction_id);
+
             Mail::send(
                 array('emails.order.verification', 'emails.order.verification-plain'),
                 array('verification_code' => $order->verification_code),
@@ -68,6 +70,8 @@ class OrderController extends BaseController {
     //
     public function verification($transaction_id)
     {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
         $this->layout->content = 
             View::make('orders/verification')
                 ->with('transaction_id', $transaction_id)
@@ -81,6 +85,8 @@ class OrderController extends BaseController {
     //
     public function doVerification($transaction_id)
     {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
         $input = Input::all();
 
         $rules = array('verification_code' => 'required|max:13');
@@ -94,6 +100,7 @@ class OrderController extends BaseController {
         }
 
         $code = Input::get('verification_code');
+
         $order = Order::where('transaction_id', $transaction_id)
                     ->where('verification_code', $code)
                     ->first();
@@ -103,12 +110,53 @@ class OrderController extends BaseController {
             $order->verification_code = NULL;
             $order->save();
 
+            Session::put('transaction_id', $order->transaction_id);
+
+            $link = route('order.contact_details', array($transaction_id));
+
+            Mail::send(
+                array('emails.order.order-link', 'emails.order.order-link-plain'),
+                array('order_link' => $link),
+                function($message) use($order) {
+                    $message
+                        ->to($order->email)
+                        ->subject('Destiny Island');
+                });
+
             return Redirect::route('order.permissions', array($transaction_id));
         } 
 
         return 
             Redirect::route('order.verification', array($transaction_id))
                 ->withMessage('Sorry, that code is not correct');
+    }
+
+
+    //
+    // Display the authenticate form to allow a customer back
+    // into a transaction from a new browser session
+    //
+    public function authentication($transaction_id)
+    {
+        $this->layout->content = 
+            View::make('orders/authentication')
+                ->with('transaction_id', $transaction_id)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'authenticate user');
+    }
+
+
+    //
+    // Authenticate the user before letting them return to an order
+    //
+    public function doAuthentication($transaction_id)
+    {
+        $email = Input::get('email');
+        $order = Order::where('transaction_id', $transaction_id)
+                    ->where('email', $email)
+                    ->firstOrFail();
+        Session::put('transaction_id', $transaction_id);
+        return Redirect::route('order.contact_details', array($transaction_id));
     }
 
 

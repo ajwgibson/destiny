@@ -108,22 +108,46 @@ Route::filter('csrf', function()
 
 /*
 |--------------------------------------------------------------------------
-| Order Filter
+| Order Filters
 |--------------------------------------------------------------------------
 |
 */
-Route::filter('order', function()
+Route::filter('order_verified', function()
+{
+	// If the user supplied a transaction id...
+	$transaction_id = Route::input('transaction_id');
+	if ($transaction_id) {
+
+		// a. Make sure it's for a valid order
+		$order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+		// b. Make sure the order has been verified
+        if ($order->verification_code) {
+            return Redirect::route('order.verification', array($transaction_id));
+        }
+
+	} else {
+
+		// If the customer was in the middle of an order the id might still be in the session
+		$transaction_id = Session::get('transaction_id');
+		if ($transaction_id) {
+			return Redirect::route('order.contact_details', array($transaction_id));
+		}
+	}
+});
+
+Route::filter('order_in_session', function()
 {
 	$transaction_id = Route::input('transaction_id');
 
 	if ($transaction_id) {
 
-		$order = Order::where('transaction_id', $transaction_id)->firstOrFail();
-
-        if ($order->verification_code) {
-            return Redirect::route('order.verification', array($transaction_id));
+        $stored_transaction_id = Session::get('transaction_id');
+        
+        if ($stored_transaction_id != $transaction_id) {
+        	Session::forget('transaction_id');
+            return Redirect::route('order.authentication', array($transaction_id));
         }
-
-	}
+	} 
 });
 
