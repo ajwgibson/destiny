@@ -10,13 +10,20 @@ Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
 
 Route::group(array('prefix' => 'order'), function()
 {
-    Route::get ('contact_details/{transaction_id?}', array('as' => 'order.contact_details',    'uses' => 'OrderController@contactDetails'));
-    Route::post('contact_details/{transaction_id?}', array('as' => 'order.contact_details.do', 'uses' => 'OrderController@doContactDetails'));
+    Route::group(array('before' => 'order'), function()
+    {
+        Route::get ('contact_details/{transaction_id?}', array('as' => 'order.contact_details',    'uses' => 'OrderController@contactDetails'));
+        Route::post('contact_details/{transaction_id?}', array('as' => 'order.contact_details.do', 'uses' => 'OrderController@doContactDetails'));
 
-    Route::get ('permissions/{transaction_id}', array('as' => 'order.permissions',    'uses' => 'OrderController@permissions'));
-    Route::post('permissions/{transaction_id}', array('as' => 'order.permissions.do', 'uses' => 'OrderController@doPermissions'));
+        Route::get ('permissions/{transaction_id}', array('as' => 'order.permissions',    'uses' => 'OrderController@permissions'));
+        Route::post('permissions/{transaction_id}', array('as' => 'order.permissions.do', 'uses' => 'OrderController@doPermissions'));
+        
+        Route::get ('confirmation/{transaction_id}', array('as' => 'order.confirmation',    'uses' => 'OrderController@confirmation'));    
+    });
+
+    Route::get ('verification/{transaction_id}', array('as' => 'order.verification',    'uses' => 'OrderController@verification'));
+    Route::post('verification/{transaction_id}', array('as' => 'order.verification.do', 'uses' => 'OrderController@doVerification'));
     
-    Route::get ('confirmation/{transaction_id}', array('as' => 'order.confirmation',    'uses' => 'OrderController@confirmation'));
 });
 
 /* 

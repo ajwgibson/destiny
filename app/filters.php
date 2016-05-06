@@ -104,3 +104,26 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Order Filter
+|--------------------------------------------------------------------------
+|
+*/
+Route::filter('order', function()
+{
+	$transaction_id = Route::input('transaction_id');
+
+	if ($transaction_id) {
+
+		$order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        if ($order->verification_code) {
+            return Redirect::route('order.verification', array($transaction_id));
+        }
+
+	}
+});
+

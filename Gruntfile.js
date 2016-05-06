@@ -133,5 +133,6 @@ module.exports = function(grunt) {
 
   // Task definition
   grunt.registerTask('default', ['less', 'concat', 'copy']);
+  grunt.registerTask('deploy',  ['less', 'concat', 'uglify', 'copy']);
 
 };

@@ -8,12 +8,16 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">Contact details</h4>
-            @if (isset($order->first_name))
-            {{{ $order->first_name . ' ' . $order->last_name }}}<br>
-            {{{ $order->email }}}<br>
-            {{{ $order->phone }}}
+            @if (isset($order))
+                @if (isset($order->first_name))
+                {{{ $order->first_name . ' ' . $order->last_name }}}<br>
+                {{{ $order->email }}}<br>
+                {{{ $order->phone }}}
+                @else
+                <i>Not captured yet</i>
+                @endif
             @else
-            <i>Not captured yet</i>
+                <i>Pending email verification</i>
             @endif
         </div>
     </div>

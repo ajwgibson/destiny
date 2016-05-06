@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="CCV Destiny Island">
 
-    <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.ico') }}">
 
     <title>Destiny Island | Causeway Coast Vineyard</title>
 
