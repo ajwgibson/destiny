@@ -18,7 +18,7 @@ class Order extends Eloquent {
     public static $contact_details_rules = array(
         'first_name'         => 'required|max:100',
         'last_name'          => 'required|max:100',
-        'email'              => 'required|email|max:254',
+        'email'              => 'required|confirmed|email|max:254',
         'phone'              => 'required|max:20',
     );
 

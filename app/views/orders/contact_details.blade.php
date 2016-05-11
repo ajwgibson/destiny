@@ -28,16 +28,22 @@
             {{ Form::text('last_name', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 100)) }}
         </div>
 
+        <div class="form-group {{ $errors->has('phone') ? 'has-error' : null }}">
+            {{{ Destiny\ViewHelper::required_icon() }}}
+            {{ Form::label('phone', 'Phone number', array ('class' => 'control-label')) }}
+            {{ Form::text('phone', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 50)) }}
+        </div>
+
         <div class="form-group {{ $errors->has('email') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
             {{ Form::label('email', 'Email address', array ('class' => 'control-label')) }}
             {{ Form::email('email', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 254)) }}
         </div>
 
-        <div class="form-group {{ $errors->has('phone') ? 'has-error' : null }}">
+        <div class="form-group {{ $errors->has('email_confirmation') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
-            {{ Form::label('phone', 'Phone number', array ('class' => 'control-label')) }}
-            {{ Form::text('phone', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 50)) }}
+            {{ Form::label('email_confirmation', 'Confirm email address', array ('class' => 'control-label')) }}
+            {{ Form::email('email_confirmation', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 254)) }}
         </div>
 
     </section>
