@@ -25,7 +25,8 @@ class OrderController extends BaseController {
     {
         $input = Input::all();
 
-        $validator = Validator::make($input, Order::$contact_details_rules);
+        if ($transaction_id) $validator = Validator::make($input, Order::$update_contact_details_rules);
+        else $validator = Validator::make($input, Order::$create_contact_details_rules);
 
         if ($validator->fails()) {
             return 

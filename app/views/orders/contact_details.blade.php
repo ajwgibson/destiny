@@ -34,6 +34,8 @@
             {{ Form::text('phone', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 50)) }}
         </div>
 
+        @if (!$order->id)
+
         <div class="form-group {{ $errors->has('email') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
             {{ Form::label('email', 'Email address', array ('class' => 'control-label')) }}
@@ -45,6 +47,8 @@
             {{ Form::label('email_confirmation', 'Confirm email address', array ('class' => 'control-label')) }}
             {{ Form::email('email_confirmation', null, array('aria-required'=> 'true', 'class' => 'form-control', 'maxlength' => 254)) }}
         </div>
+
+        @endif
 
     </section>
 
