@@ -203,6 +203,7 @@ class OrderController extends BaseController {
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
         $input = Input::all();
+        if (!Input::has('sleepover')) $input['sleepover'] = 0;
 
         $validator = Validator::make($input, Child::$validation_rules);
 

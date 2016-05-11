@@ -37,6 +37,13 @@
                     <h4>{{{ $child->first_name . ' ' . $child->last_name }}}</h4>
                     <div style="margin-top: 10px;">
                         <p><i>{{{ $child->first_name }}} will be {{ $child->age() }} years old on August 3rd</i></p>
+                        <p><i>
+                        @if ($child->age() > 9)
+                        {{{ $child->first_name}}} is {{{ $child->sleepover ? '' : 'not ' }}} attending the sleepover.
+                        @else
+                        {{{ $child->first_name}}} is not old enough to attend the sleepover.
+                        @endif
+                        </i></p>
                         <a href="{{ route('order.child', 
                                         array(
                                             'transaction_id' => $order->transaction_id,

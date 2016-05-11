@@ -13,6 +13,7 @@ class Child extends Eloquent {
         'date_of_birth', 
         'school_year',
         'group_name',
+        'sleepover',
     );
 
     public static $validation_rules = array(

@@ -44,6 +44,17 @@
             </div>
         </div>
 
+        <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age() > 9 || $child->sleepover ? '' : 'hidden' }}">
+            {{ Form::label('sleepover', 'Attending sleepover', array ('class' => 'control-label')) }}
+            <div>
+                <label class="checkbox-inline">{{ Form::checkbox('sleepover', true) }} Yes</label>
+            </div>
+            <p class="help-block">
+                A child has to be aged 10 or over to attend the sleepover and 
+                there is an additional cost of £6.
+            </p>
+        </div>
+
     </section>
 
 </div>
@@ -51,6 +62,11 @@
 <div class="row top-20">
     <section class="col-xs-6">
         {{ Form::submit('Save', array ('class' => 'btn btn-primary')) }} 
+        {{ link_to_route(
+            'order.children', 
+            'Cancel', 
+            $parameters = array('transaction_id' => $order->transaction_id), 
+            $attributes = array('class' => 'btn btn-default')) }}
     </section>
 </div>
 
@@ -72,6 +88,30 @@
 <script type="text/javascript">
     // Initialise datepicker inputs
     $('.dp3').datepicker();
+
+    $('input[name="date_of_birth"').change(function() {
+        
+        dob = new Date($(this).val());
+        comparison = new Date('2016-08-03');
+        age = comparison.getFullYear() - dob.getFullYear();
+
+        if (dob.getMonth() > comparison.getMonth()
+            || (dob.getMonth() == comparison.getMonth()
+                && dob.getDate() > comparison.getDate())) {
+            age -= 1;  
+        }
+
+        if (age < 10) {
+            $('#sleepover').prop('checked', false);
+            $('#sleepover').prop('disabled', true);
+            $('#sleepover_section').addClass('hidden');
+        } else {
+            $('#sleepover').prop('disabled', false);
+            $('#sleepover_section').removeClass('hidden');
+        }
+        
+    });
+
 </script>
 
 @stop
