@@ -28,7 +28,6 @@ class OrderController extends BaseController {
         $validator = Validator::make($input, Order::$contact_details_rules);
 
         if ($validator->fails()) {
-            Log::debug($validator->errors());
             return 
                 Redirect::route('order.contact_details', array($transaction_id))
                     ->withInput()
