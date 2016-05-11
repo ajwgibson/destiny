@@ -109,3 +109,16 @@ HTML::macro('wizard_next', function($parameters = array())
         '<button type="submit" class="btn btn-primary pull-right">Next '
         . '<span class="glyphicon glyphicon-chevron-right"></span></button>';
 });
+
+HTML::macro('wizard_next_link', function($route, $disabled = false, $parameters = array())
+{
+    $url = route($route, $parameters);
+    $classes = 'btn btn-primary pull-right';
+    if ($disabled) $classes .= ' disabled';
+    return 
+        '<a href="' 
+        . $url 
+        . '" class="' 
+        . $classes 
+        . '"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>';
+});

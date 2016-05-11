@@ -28,7 +28,15 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">Children</h4>
+            @if (isset($order) && $order->children->count() > 0)
+            <ul class="list-unstyled">
+                @foreach ($order->children as $child)
+                <li>{{{ $child->first_name . ' ' . $child->last_name }}}</li>
+                @endforeach
+            </ul>
+            @else
             <i>Not captured yet</i>
+            @endif
         </div>
     </div>
 
@@ -60,7 +68,11 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">Price</h4>
+            @if (isset($order) && $order->children->count() > 0)
+            £{{ money_format('%i', $order->cost()) }}
+            @else
             <i>Not calculated yet</i>
+            @endif
         </div>
     </div>
 

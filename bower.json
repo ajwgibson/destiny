@@ -1,6 +1,7 @@
 {
   "name": "destiny",
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "bootstrap-datepicker": "^1.6.1"
   }
 }

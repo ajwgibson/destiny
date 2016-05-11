@@ -28,5 +28,18 @@ class Order extends Eloquent {
     );
 
 
+    // Relationship
+    public function children()
+    {
+        return $this->hasMany('Child');
+    }
+
+    // Cost
+    public function cost()
+    {
+        $cost = $this->children->count() * 10.0;
+        $extra_cost = $this->children()->where('sleepover', true)->count() * 6.0;
+        return $cost + $extra_cost;
+    }
 
 }

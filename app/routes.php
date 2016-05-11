@@ -20,6 +20,13 @@ Route::group(array('prefix' => 'order'), function()
             Route::get ('permissions/{transaction_id}', array('as' => 'order.permissions',    'uses' => 'OrderController@permissions'));
             Route::post('permissions/{transaction_id}', array('as' => 'order.permissions.do', 'uses' => 'OrderController@doPermissions'));
             
+            Route::get ('children/{transaction_id}',          array('as' => 'order.children',     'uses' => 'OrderController@children'));  
+            Route::get ('child/{transaction_id}/{child_id?}', array('as' => 'order.child',        'uses' => 'OrderController@child'));  
+            Route::post('child/{transaction_id}/{child_id?}', array('as' => 'order.child.do',        'uses' => 'OrderController@doChild'));  
+
+            Route::get ('remove_child/{transaction_id}/{child_id}', array('as' => 'order.remove.child',    'uses' => 'OrderController@removeChild'));  
+            Route::post('remove_child/{transaction_id}/{child_id}', array('as' => 'order.remove.child.do', 'uses' => 'OrderController@doRemoveChild'));  
+
             Route::get ('confirmation/{transaction_id}', array('as' => 'order.confirmation',    'uses' => 'OrderController@confirmation'));  
         });
 

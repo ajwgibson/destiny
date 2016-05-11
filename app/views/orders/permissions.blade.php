@@ -63,7 +63,7 @@
 
 <div class="row top-20">
     <section class="col-xs-12">
-        {{ HTML::wizard_previous('order.contact_details', array('transaction_id' => $order->transaction_id)) }}
+        {{ HTML::wizard_previous('order.children', array('transaction_id' => $order->transaction_id)) }}
         {{ HTML::wizard_next(array('transaction_id' => $order->transaction_id)) }}
     </section>
 </div>

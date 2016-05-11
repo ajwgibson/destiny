@@ -39,7 +39,7 @@ class OrderController extends BaseController {
             $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
             $order->update($input);
 
-            return Redirect::route('order.permissions', array($transaction_id));
+            return Redirect::route('order.children', array($transaction_id));
 
         } else {
 
@@ -123,7 +123,7 @@ class OrderController extends BaseController {
                         ->subject('Destiny Island');
                 });
 
-            return Redirect::route('order.permissions', array($transaction_id));
+            return Redirect::route('order.children', array($transaction_id));
         } 
 
         return 
@@ -157,6 +157,102 @@ class OrderController extends BaseController {
                     ->firstOrFail();
         Session::put('transaction_id', $transaction_id);
         return Redirect::route('order.contact_details', array($transaction_id));
+    }
+
+
+    //
+    // Show the list of children included on the order and provide a mechanism 
+    // to add, update or remove them.
+    //
+    public function children($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $this->layout->content = 
+            View::make('orders/children')
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'children');
+    }
+
+
+    //
+    // Show a form to add or edit a child
+    //
+    public function child($transaction_id, $child_id=null)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        if ($child_id) $child = Child::where('order_id', $order->id)->where('id', $child_id)->firstOrFail();
+        else $child = new Child();
+
+        $this->layout->content = 
+            View::make('orders/child')
+                ->with('child', $child)
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'add a child');
+    }
+
+
+    //
+    // Add or update a child
+    //
+    public function doChild($transaction_id, $child_id=null)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $input = Input::all();
+
+        $validator = Validator::make($input, Child::$validation_rules);
+
+        if ($validator->fails()) {
+            return 
+                Redirect::route('order.child', array($transaction_id, $child_id))
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        if ($child_id) {
+
+            $child = Child::where('order_id', $order->id)->where('id', $child_id)->firstOrFail();
+            $child->update($input);
+
+        } else {
+
+            $child = new Child($input);
+            $order->children()->save($child);
+        }
+
+        return Redirect::route('order.children', array($transaction_id));
+    }
+
+    //
+    // Show a form to remove a child
+    //
+    public function removeChild($transaction_id, $child_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+        $child = Child::where('order_id', $order->id)->where('id', $child_id)->firstOrFail();
+
+        $this->layout->content = 
+            View::make('orders/remove_child')
+                ->with('child', $child)
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'remove a child');
+    }
+
+
+    //
+    // Remove a child from the order
+    //
+    public function doRemoveChild($transaction_id, $child_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+        $child = Child::where('order_id', $order->id)->where('id', $child_id)->firstOrFail();
+        $child->delete();
+        return Redirect::route('order.children', array($transaction_id));
     }
 
 
