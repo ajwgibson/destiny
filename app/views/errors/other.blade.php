@@ -4,10 +4,10 @@
 
     <div class="jumbotron">
         <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Whoops</h1>
-        <p class="small"><code>Error code: 404</code></p>
+        <p class="small"><code>Error code: {{ $error_code }}</code></p>
         <p>
-            This is a little awkward, but we can't seem to find the page you're looking for.  
-            Perhaps you're using an old link or bookmark?
+            This is a little awkward, but something went wrong when we tried to
+            process your request. Can we ask you to try again?
         </p>
         <p>
             If you think there's a problem with our site, please let us know
