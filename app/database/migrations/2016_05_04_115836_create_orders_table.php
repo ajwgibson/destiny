@@ -19,11 +19,9 @@ class CreateOrdersTable extends Migration {
 			$table->string('transaction_id', 13)->unique();
 			$table->integer('status')->default(0);
 
-			$table->integer('booking_reference')->unsigned()->nullable();
-
 			$table->decimal('amount_due', 5, 2);
-			$table->decimal('amount_paid', 5, 2);
 			$table->decimal('amount_extra', 5, 2)->default(0);
+			$table->decimal('amount_paid', 5, 2);
 			
 			$table->string('first_name', 100);
 			$table->string('last_name', 100);

@@ -4,17 +4,21 @@
 
 @include('orders/_heading', array('title' => $title, 'subtitle' => $subtitle))
 
-<p class="lead">
-    The information you enter on this page will also be used as contact details
-    for the children you are booking places for. Their details will be entered on
-    subsequent screens.
-</p>
+<div class="row">
+    <section class="col-xs-10">
+        <p class="lead">
+            The information you enter on this page will also be used as contact details
+            for the children you are booking places for. Their details will be entered on
+            subsequent screens.
+        </p>
+    </section>
+</div>
 
 {{ Form::model($order, array('route' => array('order.contact_details.do', $order->transaction_id))) }}
 
 <div class="row">
 
-    <section class="col-xs-6">
+    <section class="col-xs-10">
 
         <div class="form-group {{ $errors->has('first_name') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
@@ -54,8 +58,8 @@
 
 </div>
 
-<div class="row top-20">
-    <section class="col-xs-6">
+<div class="row top-20 bottom-40">
+    <section class="col-xs-10">
         {{ HTML::wizard_next(array('transaction_id' => $order->transaction_id)) }}
     </section>
 </div>
@@ -67,6 +71,6 @@
 
 @section('sidebar')
 
-@include('orders/_summary')
+@include('orders/_sidebar')
 
 @stop

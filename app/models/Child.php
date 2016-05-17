@@ -36,6 +36,12 @@ class Child extends Eloquent {
         return $this->belongsTo('Order');
     }
 
+    // Name
+    public function name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    
     // Age
     public function age()
     {

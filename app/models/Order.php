@@ -3,6 +3,10 @@
 
 class Order extends Eloquent {
 
+    const DayTicketPrice       = 10.0;
+    const SleepoverTicketPrice =  6.0;
+
+
     protected $table = 'orders';
 
     protected $fillable = array(
@@ -13,6 +17,7 @@ class Order extends Eloquent {
         'notes',
         'photos_permitted', 
         'outings_permitted',
+        'amount_extra',
     );
 
     public static $create_contact_details_rules = array(
@@ -33,6 +38,10 @@ class Order extends Eloquent {
         'outings_permitted'  => 'required|boolean',
     );
 
+    public static $extra_rules = array(
+        'amount_extra'   => 'required|min:0|max:20', 
+    );
+
 
     // Relationship
     public function children()
@@ -40,12 +49,46 @@ class Order extends Eloquent {
         return $this->hasMany('Child');
     }
 
+    // Relationship
+    public function voucher()
+    {
+        return $this->hasOne('Voucher');
+    }
+
+    // Name
+    public function name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     // Cost
     public function cost()
     {
-        $cost = $this->children->count() * 10.0;
-        $extra_cost = $this->children()->where('sleepover', true)->count() * 6.0;
+        $cost = $this->children->count() * Order::DayTicketPrice;
+        $extra_cost = $this->children()->where('sleepover', true)->count() * Order::SleepoverTicketPrice;
         return $cost + $extra_cost;
+    }
+
+    // Discount
+    public function discount()
+    {
+        if ($this->voucher) {
+            
+            $tickets = $this->children->count();
+            if ($tickets > $this->voucher->child_limit) $tickets = $this->voucher->child_limit;
+
+            return round((($tickets * Order::DayTicketPrice * $this->voucher->discount) / 100.0), 2);
+
+        } else {
+            return 0.0;
+        }
+    }
+
+
+    // Cost
+    public function total()
+    {
+        return $this->cost() - $this->discount() + $this->amount_extra;
     }
 
 }

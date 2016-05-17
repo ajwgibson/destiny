@@ -49,10 +49,9 @@
         <!-- Begin page content -->
         <div class="container" id="main-content">
 
-
-
             <div class="row">
-                <div class="col-md-8">
+
+                <div class="col-md-8" id="inner-content">
 
                     @if (Session::has('info'))
                     <div class="alert alert-info alert-dismissable">
@@ -92,9 +91,11 @@
                     </div>
 
                 </div>
-                <div class="col-md-4">
+
+                <div class="col-md-4" id="sidebar">
                     @yield('sidebar')
                 </div>
+
             </div>
         </div>
     </div>

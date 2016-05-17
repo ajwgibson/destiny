@@ -27,6 +27,17 @@ Route::group(array('prefix' => 'order'), function()
             Route::get ('remove_child/{transaction_id}/{child_id}', array('as' => 'order.remove.child',    'uses' => 'OrderController@removeChild'));  
             Route::post('remove_child/{transaction_id}/{child_id}', array('as' => 'order.remove.child.do', 'uses' => 'OrderController@doRemoveChild'));  
 
+            Route::get ('voucher/{transaction_id}', array('as' => 'order.voucher',    'uses' => 'OrderController@voucher'));
+            Route::post('voucher/{transaction_id}', array('as' => 'order.voucher.do', 'uses' => 'OrderController@doVoucher'));
+
+            Route::post('apply_voucher/{transaction_id}', array('as' => 'order.voucher.apply.do', 'uses' => 'OrderController@doApplyVoucher'));
+
+            Route::get ('extra/{transaction_id}', array('as' => 'order.extra',    'uses' => 'OrderController@extra'));
+            Route::post('extra/{transaction_id}', array('as' => 'order.extra.do', 'uses' => 'OrderController@doExtra'));
+
+            Route::get ('summary/{transaction_id}', array('as' => 'order.summary',    'uses' => 'OrderController@summary'));  
+            Route::post('summary/{transaction_id}', array('as' => 'order.summary.do',    'uses' => 'OrderController@doSummary'));  
+
             Route::get ('confirmation/{transaction_id}', array('as' => 'order.confirmation',    'uses' => 'OrderController@confirmation'));  
         });
 

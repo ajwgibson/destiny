@@ -1,5 +1,5 @@
 
-<section>
+<section class="order-summary">
     <h3>Order summary</h3>
 
     <div class="media">
@@ -47,15 +47,8 @@
         <div class="media-body">
             <h4 class="media-heading">Permissions</h4>
             @if (isset($order->photos_permitted))
-            Photographs: 
-                {{ $order->photos_permitted ?
-                        '<span class="text-success"><span class="glyphicon glyphicon-ok"> </span></span>' 
-                        : '<span class="text-danger"><span class="glyphicon glyphicon-remove"> </span></span>' }}
-                <br>
-            Outings: 
-                {{ $order->outings_permitted ?
-                        '<span class="text-success"><span class="glyphicon glyphicon-ok"> </span></span>' 
-                        : '<span class="text-danger"><span class="glyphicon glyphicon-remove"> </span></span>' }}
+            Photographs: {{ HTML::yes_no_icon($order->photos_permitted) }} <br>
+            Outings:     {{ HTML::yes_no_icon($order->outings_permitted) }}
             @else
             <i>Not captured yet</i>
             @endif
@@ -69,9 +62,22 @@
         <div class="media-body">
             <h4 class="media-heading">Price</h4>
             @if (isset($order) && $order->children->count() > 0)
-            £{{ money_format('%i', $order->cost()) }}
+                @if ($order->cost() != $order->total())
+                <table class="pricing">
+                    <tr><td>Cost</td>     <td>£{{ money_format('%(#3i', $order->cost()) }}</td></tr>
+                    @if ($order->discount() > 0)
+                    <tr><td>Discount</td> <td>£{{ money_format('%(#3i', $order->discount()) }}</td></tr>
+                    @endif
+                    @if ($order->amount_extra > 0)
+                    <tr><td>Extra</td> <td>£{{ money_format('%(#3i', $order->amount_extra) }}</td></tr>
+                    @endif
+                    <tr><td>Total</td>    <td>£{{ money_format('%(#3i', $order->total()) }}</td></tr>
+                </table>
+                @else
+                    £{{ money_format('%i', $order->total()) }}
+                @endif
             @else
-            <i>Not calculated yet</i>
+                <i>Not calculated yet</i>
             @endif
         </div>
     </div>

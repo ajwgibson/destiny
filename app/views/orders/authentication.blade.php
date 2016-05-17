@@ -37,6 +37,6 @@
 
 @section('sidebar')
 
-@include('orders/_summary')
+@include('orders/_sidebar')
 
 @stop

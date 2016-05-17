@@ -5,64 +5,66 @@
 
 @include('orders/_heading')
 
-@if ($order->children->count() == 0)
-    <p class="lead">
-        You haven't added any children to your order yet. 
-    </p>
-    <p>
-    {{ link_to_route(
-            'order.child', 
-            'Add a child', 
-            $parameters = array('transaction_id' => $order->transaction_id), 
-            $attributes = array('class' => 'btn btn-success')) }}
-    </p>
-@else
-    <p class="lead">
-        These are the children currently associated with your order.
-    </p>
-    <p>
-    {{ link_to_route(
-            'order.child', 
-            'Add a child', 
-            $parameters = array('transaction_id' => $order->transaction_id), 
-            $attributes = array('class' => 'btn btn-success')) }}
-    </p>
+<div class="row">
+    <section class="col-xs-10">
+        <p class="lead">
+        @if ($order->children->count() == 0)
+            You haven't added any children to your order yet. 
+        @else
+            These are the children currently associated with your order.
+        @endif
+        </p>
+    </section>
+</div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <ul class="list-group">
-                @foreach ($order->children as $child)
-                <li class="list-group-item" style="margin-bottom: 10px;">
-                    
-                    <h4>{{{ $child->first_name . ' ' . $child->last_name }}}</h4>
-                    <div style="margin-top: 10px;">
-                        <p><i>{{{ $child->first_name }}} will be {{ $child->age() }} years old on August 3rd</i></p>
-                        <p><i>
-                        @if ($child->age() > 9)
-                        {{{ $child->first_name}}} is {{{ $child->sleepover ? '' : 'not ' }}} attending the sleepover.
-                        @else
-                        {{{ $child->first_name}}} is not old enough to attend the sleepover.
-                        @endif
-                        </i></p>
-                        <a href="{{ route('order.child', 
-                                        array(
-                                            'transaction_id' => $order->transaction_id,
-                                            'child_id' => $child->id)) }}" 
-                           class="btn btn-xs btn-link"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                        <a href="{{ route('order.remove.child', 
-                                        array(
-                                            'transaction_id' => $order->transaction_id,
-                                            'child_id' => $child->id)) }}" 
-                           class="btn btn-xs btn-link"><span class="text-danger"><span class="glyphicon glyphicon-remove"></span> Remove</span></a>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-        </div>    </div>
-@endif
+<div class="row">
+    <div class="col-xs-8">
+        {{ link_to_route(
+                'order.child', 
+                'Add a child', 
+                $parameters = array('transaction_id' => $order->transaction_id), 
+                $attributes = array('class' => 'btn btn-success')) }}
+    </div>
+</div>
 
 <div class="row top-20">
-    <section class="col-xs-12">
+    <div class="col-sm-8">
+        @foreach ($order->children as $child)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>{{{ $child->name() }}}</h4>
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Date of birth</dt>                     <dd>{{{ $child->date_of_birth->format('jS F Y') }}}</dd>
+                    <dt>Age on August 3rd</dt>                 <dd>{{ $child->age() }}</dd>
+                    <dt>T-shirt size</dt>                      <dd>{{ $child->tshirt }}</dd>
+                    <dt>Dancing</dt>                           <dd>{{ HTML::yes_no_icon($child->dancing) }}</dd>
+                    <dt>Sleepover</dt>                         <dd>{{ HTML::yes_no_icon($child->sleepover) }}</dd>
+                </dl>
+            </div>
+            <div class="panel-footer">
+                <div class="pull-right">
+                    <a href="{{ route('order.child', 
+                                    array(
+                                        'transaction_id' => $order->transaction_id,
+                                        'child_id' => $child->id)) }}" 
+                       class="btn btn-xs btn-link"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <a href="{{ route('order.remove.child', 
+                                    array(
+                                        'transaction_id' => $order->transaction_id,
+                                        'child_id' => $child->id)) }}" 
+                       class="btn btn-xs btn-link"><span class="text-danger"><span class="glyphicon glyphicon-remove"></span> Remove</span></a>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+            </div>
+        </div>
+        @endforeach
+    </div>    
+</div>
+
+<div class="row top-20 bottom-40">
+    <section class="col-xs-10">
         {{ HTML::wizard_previous('order.contact_details', array('transaction_id' => $order->transaction_id)) }}
         {{ HTML::wizard_next_link(
             'order.permissions', 
@@ -76,6 +78,6 @@
 
 @section('sidebar')
 
-@include('orders/_summary')
+@include('orders/_sidebar')
 
 @stop

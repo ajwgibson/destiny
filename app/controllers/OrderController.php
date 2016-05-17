@@ -293,6 +293,135 @@ class OrderController extends BaseController {
 
         $order->update($input);
 
+        if ($order->amount_extra > 0 && !$order->voucher)
+            return Redirect::route('order.extra', array($transaction_id));
+        else
+            return Redirect::route('order.voucher', array($transaction_id));
+    }
+
+
+    //
+    // Show the voucher form
+    //
+    public function voucher($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $this->layout->content = 
+            View::make('orders/voucher')
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'voucher details');
+    }
+
+
+    //
+    // Proceed from the voucher screen
+    //
+    public function doVoucher($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+        
+        if ($order->voucher && $order->amount_extra == 0)
+            return Redirect::route('order.summary', array($transaction_id));
+        else
+            return Redirect::route('order.extra', array($transaction_id));
+    }
+
+
+    //
+    // Apply a voucher code
+    //
+    public function doApplyVoucher($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+        
+        $code = Input::get('code', null);
+
+        $voucher = Voucher::where('code', $code)->where('order_id', null)->first();
+
+        if ($voucher) {
+            
+            $voucher->order_id = $order->id;
+            $voucher->save();
+
+            return 
+                Redirect::route('order.voucher', array($transaction_id))
+                    ->withSuccess('Voucher applied to order');
+
+        } else {
+            return 
+                Redirect::route('order.voucher', array($transaction_id))
+                    ->withErrors(array('code' => 'Invalid voucher code'));
+        }
+
+    }
+
+
+    //
+    // Show the extra payment form
+    //
+    public function extra($transaction_id)
+    {
+        Log::debug('extra');
+
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $this->layout->content = 
+            View::make('orders/extra')
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'extra contribution');
+    }
+
+
+    //
+    // Proceed from the extra screen
+    //
+    public function doExtra($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $input = Input::all();
+
+        $validator = Validator::make($input, Order::$extra_rules);
+
+        if ($validator->fails()) {
+            return 
+                Redirect::route('order.extra', array($transaction_id))
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        $order->update($input);
+
+        return Redirect::route('order.summary', array($transaction_id));
+    }
+
+
+    //
+    // Summary screen
+    //
+    public function summary($transaction_id)
+    {
+        Log::debug('summary');
+
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $this->layout->content = 
+            View::make('orders/summary')
+                ->with('order', $order)
+                ->with('title', 'Order form')
+                ->with('subtitle', 'summary');
+    }
+
+
+    //
+    // Summary screen
+    //
+    public function doSummary($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
         return Redirect::route('order.confirmation', array($transaction_id));
     }
 

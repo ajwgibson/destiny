@@ -50,7 +50,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
-    return Response::view('errors.other', array('error_code' => $code), $code);
+    //return Response::view('errors.other', array('error_code' => $code), $code);
 });
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
@@ -122,4 +122,13 @@ HTML::macro('wizard_next_link', function($route, $disabled = false, $parameters 
         . '" class="' 
         . $classes 
         . '"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>';
+});
+
+HTML::macro('yes_no_icon', function($value)
+{
+    if ($value) {
+        return '<span class="text-success"><span class="glyphicon glyphicon-ok"> </span></span>';
+    }
+    
+    return '<span class="text-danger"><span class="glyphicon glyphicon-remove"> </span></span>';
 });
