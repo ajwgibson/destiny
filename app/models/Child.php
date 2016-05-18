@@ -14,12 +14,19 @@ class Child extends Eloquent {
         'school_year',
         'group_name',
         'sleepover',
+        'tshirt',
+        'dancing'
     );
 
     public static $validation_rules = array(
         'first_name'         => 'required|max:100',
         'last_name'          => 'required|max:100',
         'date_of_birth'      => 'required|date',
+        'tshirt'             => 'required',
+    );
+
+    public static $validation_messages = array(
+        'tshirt.required'    => "The T-shirt size field is required.",
     );
 
     // Define which properties should be treated as dates

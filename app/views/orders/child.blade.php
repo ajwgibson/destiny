@@ -44,6 +44,31 @@
             </div>
         </div>
 
+        <div class="form-group {{ $errors->has('tshirt') ? 'has-error' : null }}">
+            {{{ Destiny\ViewHelper::required_icon() }}}
+            {{ Form::label('tshirt', 'T-shirt size', array ('class' => 'control-label')) }}
+            {{ Form::select(
+                    'tshirt', 
+                    array ( ''       => 'Select a size...',
+                            'SMALL'  => 'SMALL',
+                            'MEDIUM' => 'MEDIUM',
+                            'LARGE'  => 'LARGE' ), 
+                    null, 
+                    array ('class' => 'form-control')) }}
+        </div>
+
+        <div class="form-group {{ $errors->has('dancing') ? 'has-error' : null }}">
+            {{ Form::label('dancing', 'Dance activity', array ('class' => 'control-label')) }}
+            <div>
+                <label class="checkbox-inline">{{ Form::checkbox('dancing', true) }} Yes</label>
+            </div>
+            <p class="help-block">
+                This year the children will rotate around the activities in their teams unless 
+                they want to take part in the Dance Group that will run with the same children for 
+                the 3 days. If you want the Dance Activity please tick this option.
+            </p>
+        </div>
+
         <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age() > 9 || $child->sleepover ? '' : 'hidden' }}">
             {{ Form::label('sleepover', 'Attending sleepover', array ('class' => 'control-label')) }}
             <div>
