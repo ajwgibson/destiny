@@ -1,6 +1,17 @@
 <?php 
 
+
 class OrderController extends BaseController {
+
+    //
+    // Force a new order
+    //
+    public function newOrder()
+    {
+        Session::forget('transaction_id');
+        return Redirect::route('order.contact_details');
+    }
+
 
     //
     // Show the contact details form (the first in the wizard)
@@ -109,6 +120,7 @@ class OrderController extends BaseController {
         if ($order) {
 
             $order->verification_code = NULL;
+            $order->status = Order::StatusVerified;
             $order->save();
 
             Session::put('transaction_id', $order->transaction_id);
@@ -204,7 +216,7 @@ class OrderController extends BaseController {
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
         $input = Input::all();
-        
+
         if (!Input::has('sleepover')) $input['sleepover'] = 0;
         if (!Input::has('dancing'))   $input['dancing'] = 0;
 
@@ -365,8 +377,6 @@ class OrderController extends BaseController {
     //
     public function extra($transaction_id)
     {
-        Log::debug('extra');
-
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
         $this->layout->content = 
@@ -406,8 +416,6 @@ class OrderController extends BaseController {
     //
     public function summary($transaction_id)
     {
-        Log::debug('summary');
-
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
         $this->layout->content = 
@@ -424,7 +432,101 @@ class OrderController extends BaseController {
     public function doSummary($transaction_id)
     {
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
-        return Redirect::route('order.confirmation', array($transaction_id));
+
+        if (Input::has('stripeToken')) {
+
+            $token = Input::get('stripeToken');
+
+            \Stripe\Stripe::setApiKey(Config::get('stripe.stripe_private_key'));
+
+            try {
+
+                $charge = \Stripe\Charge::create(
+                    array(
+                        "amount"      => $order->total_pence(),
+                        "currency"    => "gbp",
+                        "source"      => $token,
+                        "description" => "Destiny Island Booking for " . $order->name(),
+                        "metadata"    => array("order_id" => $transaction_id)
+                    ));
+
+                $order->status = Order::StatusComplete;
+                $order->stripe_charge_id = $charge->id;
+                $order->save();
+
+                return Redirect::route('order.confirmation', array($transaction_id));
+
+            } catch(\Stripe\Error\Card $e) {
+
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage('There was a problem with your payment. Please check your card details and try again.');
+
+            } catch (\Stripe\Error\RateLimit $e) {
+
+                // Too many requests made to the API too quickly
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage('There was a problem with the payment service and your payment was not taken. Please try again.');
+
+            } catch (\Stripe\Error\InvalidRequest $e) {
+
+                // Invalid parameters were supplied to Stripe's API
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage("We're experienceing some problems with the payment service and your payment was not taken. Please try again.");
+
+            } catch (\Stripe\Error\Authentication $e) {
+                // Authentication with Stripe's API failed
+                // (maybe you changed API keys recently)
+
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage("We're experienceing some problems with the payment service and your payment was not taken. Please try again.");
+
+            } catch (\Stripe\Error\ApiConnection $e) {
+
+                // Network communication with Stripe failed
+                
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage("We're experienceing some problems with the payment service and your payment was not taken. Please try again.");
+
+            } catch (\Stripe\Error\Base $e) {
+
+                // Display a very generic error to the user, and maybe send
+                // yourself an email
+
+                Log::error($e->getJsonBody());
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage("We're experienceing some problems with the payment service and your payment was not taken. Please try again.");
+
+            } catch (Exception $e) {
+
+                // Something else happened, completely unrelated to Stripe
+                Log::error($e);
+
+                return 
+                    Redirect::route('order.summary', array($transaction_id))
+                        ->withMessage("We're experienceing some problems and your payment was not taken. Please try again.");
+            }
+
+        } 
+
+        return Redirect::route('order.summary', array($transaction_id))
+            ->withMessage('Sorry, something went wrong. Please try again');
     }
 
 

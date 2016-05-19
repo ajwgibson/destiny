@@ -6,6 +6,15 @@ class Order extends Eloquent {
     const DayTicketPrice       = 10.0;
     const SleepoverTicketPrice =  6.0;
 
+    const StatusNew         = 0;
+    const StatusVerified    = 1;
+    const StatusComplete    = 2;
+
+    public static $states = array (
+        self::StatusNew        => 'New',
+        self::StatusVerified   => 'Verified',
+        self::StatusComplete   => 'Complete'
+    );
 
     protected $table = 'orders';
 
@@ -85,10 +94,16 @@ class Order extends Eloquent {
     }
 
 
-    // Cost
+    // Order total
     public function total()
     {
         return $this->cost() - $this->discount() + $this->amount_extra;
+    }
+
+    // Order total in pence
+    public function total_pence()
+    {
+        return floor($this->total() * 100);
     }
 
 }

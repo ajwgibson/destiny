@@ -116,24 +116,28 @@ Route::filter('order_verified', function()
 {
 	// If the user supplied a transaction id...
 	$transaction_id = Route::input('transaction_id');
+
+	if (!($transaction_id)) {
+		// If the customer was in the middle of an order the id might still be in the session
+		$transaction_id = Session::get('transaction_id');
+	}
+
 	if ($transaction_id) {
 
 		// a. Make sure it's for a valid order
 		$order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
-		// b. Make sure the order has been verified
+		// b. If the order is already complete, only allow the confirmation page to be shown
+		if ($order->status == Order::StatusComplete && Request::segment(2) != 'confirmation') {
+            return Redirect::route('order.confirmation', array($transaction_id));
+		}
+
+		// c. Make sure the order has been verified
         if ($order->verification_code) {
             return Redirect::route('order.verification', array($transaction_id));
         }
+	} 
 
-	} else {
-
-		// If the customer was in the middle of an order the id might still be in the session
-		$transaction_id = Session::get('transaction_id');
-		if ($transaction_id) {
-			return Redirect::route('order.contact_details', array($transaction_id));
-		}
-	}
 });
 
 Route::filter('order_in_session', function()

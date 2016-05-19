@@ -45,6 +45,8 @@ Route::group(array('prefix' => 'order'), function()
         Route::post('authentication/{transaction_id}', array('as' => 'order.authentication.do', 'uses' => 'OrderController@doAuthentication'));  
     });
 
+    Route::get ('new', array('as' => 'order.new', 'uses' => 'OrderController@newOrder'));
+
     Route::get ('verification/{transaction_id}', array('as' => 'order.verification',    'uses' => 'OrderController@verification'));
     Route::post('verification/{transaction_id}', array('as' => 'order.verification.do', 'uses' => 'OrderController@doVerification'));
 });
