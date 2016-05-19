@@ -92,7 +92,7 @@
 
                 </div>
 
-                <div class="col-md-4" id="sidebar">
+                <div class="col-md-4 hidden-print" id="sidebar">
                     @yield('sidebar')
                 </div>
 
