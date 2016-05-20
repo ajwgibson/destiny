@@ -127,8 +127,10 @@ Route::filter('order_verified', function()
 		// a. Make sure it's for a valid order
 		$order = Order::where('transaction_id', $transaction_id)->firstOrFail();
 
-		// b. If the order is already complete, only allow the confirmation page to be shown
-		if ($order->status == Order::StatusComplete && Request::segment(2) != 'confirmation') {
+		// b. If the order is already complete, only allow the confirmation or authentication page to be shown
+		if ($order->status == Order::StatusComplete 
+			&& Request::segment(2) != 'confirmation'
+			&& Request::segment(2) != 'authentication') {
             return Redirect::route('order.confirmation', array($transaction_id));
 		}
 

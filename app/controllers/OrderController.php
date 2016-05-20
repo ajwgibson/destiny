@@ -454,6 +454,15 @@ class OrderController extends BaseController {
                 $order->stripe_charge_id = $charge->id;
                 $order->save();
 
+                Mail::send(
+                    array('emails.order.confirmation', 'emails.order.confirmation-plain'),
+                    array('order' => $order),
+                    function($message) use($order) {
+                        $message
+                            ->to($order->email)
+                            ->subject('Destiny Island Order Confirmation');
+                    });
+
                 return Redirect::route('order.confirmation', array($transaction_id));
 
             } catch(\Stripe\Error\Card $e) {
