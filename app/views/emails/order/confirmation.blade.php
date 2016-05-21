@@ -37,22 +37,39 @@
             <td>
                 <table border="0" cellspacing="2" cellpadding="2">
                 @foreach ($order->children as $child)
-                <tr>
-                    <td>Name</td>               <td>{{ $child->name() }}</td>
-                    <td>Date of birth</td>      <td>{{ $child->date_of_birth->format('jS F Y') }}</td>
-                    <td>Age on August 3rd</td>  <td>{{ $child->age() }}</td>
-                    <td>T-shirt size</td>       <td>{{ $child->tshirt }}</td>
-                    <td>Dancing</td>            <td>{{ $child->dancing ? 'Yes' : 'No' }}</td>
-                    <td>Sleepover</td>          <td>{{ $child->sleepover ? 'Yes' : 'No' }}</td>
-                </tr>
+                    <tr>
+                        <td>Name</td>               
+                        <td>{{ $child->name() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of birth</td>      
+                        <td>{{ $child->date_of_birth->format('jS F Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Age on August 3rd</td>  
+                        <td>{{ $child->age() }}</td>
+                    </tr>
+                    <tr>
+                        <td>T-shirt size</td>       
+                        <td>{{ $child->tshirt }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dancing</td>            
+                        <td>{{ $child->dancing ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sleepover</td>          
+                        <td>{{ $child->sleepover ? 'Yes' : 'No' }}</td>
+                    </tr>
                 @endforeach
+                </table>
             </td>
         </tr>
 
         <tr valign="top">
             <td nowrap>Permissions</td>
             <td>
-                Photographs: {{ $order->photos_permitted ? 'Yes' : 'No' }}
+                Photographs: {{ $order->photos_permitted ? 'Yes' : 'No' }}<br/>
                 Outings: {{ $order->outings_permitted ? 'Yes' : 'No' }}
             </td>
         </tr>
