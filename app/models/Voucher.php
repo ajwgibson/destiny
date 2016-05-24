@@ -2,7 +2,11 @@
 
 class Voucher extends Eloquent {
 
+    use SoftDeletingTrait;
+
     protected $table = 'vouchers';
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = array(
         'discount', 

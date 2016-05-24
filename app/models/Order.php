@@ -3,6 +3,8 @@
 
 class Order extends Eloquent {
 
+    use SoftDeletingTrait;
+
     const DayTicketPrice       = 10.0;
     const SleepoverTicketPrice =  6.0;
 
@@ -17,6 +19,8 @@ class Order extends Eloquent {
     );
 
     protected $table = 'orders';
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = array(
         'first_name', 
@@ -106,4 +110,25 @@ class Order extends Eloquent {
         return floor($this->total() * 100);
     }
 
+    // Status as a readable value
+    public function status()
+    {
+        return Order::$states[$this->status];
+    }
+
+
+    //
+    // Laravel's equivalent to calling the constructor on a model
+    //
+    public static function boot()
+    {
+        parent::boot();    
+
+        // Register a "deleted" event handler to soft-delete associated models.
+        static::deleted(function($order) 
+        {
+            $order->children()->delete();
+            $order->voucher()->delete();
+        });
+    }
 }

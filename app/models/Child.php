@@ -4,7 +4,11 @@ use Carbon\Carbon;
 
 class Child extends Eloquent {
 
+    use SoftDeletingTrait;
+
     protected $table = 'children';
+    
+    protected $dates = ['deleted_at'];
 
     protected $fillable = array(
         'first_name', 
