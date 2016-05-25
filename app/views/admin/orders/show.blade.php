@@ -59,14 +59,6 @@
             'class' => 'delete' ) ) }}
 
     <div class="action">
-        {{ link_to_route(
-            'admin.order.index', 
-            'Go back',
-            $parameters = array(),
-            $attributes = array( 'class' => 'btn btn-default' )) }}
-    </div>
-
-    <div class="action">
         {{ Form::button(
             'Delete this order', 
             array(

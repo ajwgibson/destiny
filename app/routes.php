@@ -75,6 +75,16 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get(   'order',              array('as' => 'admin.order.index',          'uses' => 'OrderController@index'));
     Route::get(   'order/{id}',         array('as' => 'admin.order.show',           'uses' => 'OrderController@show'));
     Route::delete('order/{id}/destroy', array('as' => 'admin.order.destroy',        'uses' => 'OrderController@destroy'));
+
+    Route::post(  'voucher/filter',       array('as' => 'admin.voucher.filter',         'uses' => 'VoucherController@filter'));
+    Route::get(   'voucher/resetFilter',  array('as' => 'admin.voucher.filter.reset',   'uses' => 'VoucherController@resetFilter'));
+    Route::get(   'voucher',              array('as' => 'admin.voucher.index',          'uses' => 'VoucherController@index'));
+    Route::get(   'voucher/create',       array('as' => 'admin.voucher.create',         'uses' => 'VoucherController@create'));
+    Route::post(  'voucher/store',        array('as' => 'admin.voucher.store',          'uses' => 'VoucherController@store'));
+    Route::get(   'voucher/{id}/edit',    array('as' => 'admin.voucher.edit',           'uses' => 'VoucherController@edit'));
+    Route::post(  'voucher/{id}/update',  array('as' => 'admin.voucher.update',         'uses' => 'VoucherController@update'));
+    Route::get(   'voucher/{id}',         array('as' => 'admin.voucher.show',           'uses' => 'VoucherController@show'));
+    Route::delete('voucher/{id}/destroy', array('as' => 'admin.voucher.destroy',        'uses' => 'VoucherController@destroy'));
 });
 
 

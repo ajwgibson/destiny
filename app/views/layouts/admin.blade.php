@@ -44,6 +44,7 @@
                         <li class="">{{ link_to_route('registration.home', 'REGISTRATION') }}</li>
                         <li class="">{{ link_to_route('admin.home', 'ADMIN') }}</li>
                         <li class="">{{ link_to_route('admin.order.index', 'ORDERS') }}</li>
+                        <li class="">{{ link_to_route('admin.voucher.index', 'VOUCHERS') }}</li>
                         <li class="">{{ link_to_route('admin.user.index', 'USERS') }}</li>
                         <li class="">{{ link_to_route('logout', 'LOGOUT') }}</li>
                         @endif
