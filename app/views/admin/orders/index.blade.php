@@ -72,6 +72,8 @@
                     <th>Phone</th>
                     <th>Children</th>
                     <th>Status</th>
+                    <th>Voucher</th>
+                    <th>Paid</th>
                     <th>Last updated</th>
                     <th></th>
                 </tr>
@@ -88,6 +90,16 @@
                     @endforeach
                     </td>
                     <td>{{{ $order->status() }}}</td>
+                    <td>
+                        @if ($order->voucher)
+                        <code>{{{ $order->voucher->code }}}</code>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($order->amount_paid > 0)
+                        £{{ money_format('%(#3i', $order->amount_paid) }}
+                        @endif
+                    </td>
                     <td>{{{ $order->updated_at->format('d-m-Y H:i:s') }}}</td>
                     <td>
                         {{ link_to_route(
