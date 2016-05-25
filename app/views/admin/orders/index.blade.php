@@ -16,7 +16,7 @@
 
     {{ Form::open(array('route' => array('admin.order.filter'))) }}
 
-    <div class="col-sm-6 col-sm-offset-6 panel panel-default">
+    <div class="col-sm-8 col-sm-offset-4 panel panel-default">
 
         <div class="col-sm-6">
 
@@ -25,7 +25,7 @@
                 <div>
                     {{ Form::text('filter_name', $filter_name, array ('class' => 'form-control')) }}
                 </div>
-                <p class="help-block">You can enter a full or partial first or last name, but not both</p>
+                <p class="help-block">Try a full or partial first or last name, but not both</p>
             </div>
 
         </div>
@@ -37,11 +37,13 @@
                 <div>
                     {{ Form::text('filter_email', $filter_email, array ('class' => 'form-control')) }}
                 </div>
+                <p class="help-block">A full or partial email address</p>
             </div>
 
         </div>
 
         <div class="col-sm-6 col-sm-offset-6">
+            <div class="pull-right">
             {{ Form::submit('Apply filters', array('class' => 'btn btn-info')) }}
 
             {{ link_to_route(
@@ -49,7 +51,7 @@
                 'Reset filters', 
                 $parameters = array( ), 
                 $attributes = array( 'class' => 'btn btn-default' ) ) }}
-
+            </div>
         </div>
 
     </div>
