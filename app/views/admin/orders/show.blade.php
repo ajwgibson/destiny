@@ -77,7 +77,6 @@
 
     {{ Form::close() }}
 
-
 </div>
 
 
@@ -91,10 +90,7 @@
                     <span class="glyphicon glyphicon-warning-sign"></span> Warning
                 </p>
                 <p>
-                    You are about to delete this order.
-                    <br/>
-                    <br/>
-                    Are you sure you want to continue?
+                    You are about to delete this order. Are you sure you want to continue?
                 </p>
             </div>
             <div class="modal-footer">
