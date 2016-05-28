@@ -55,7 +55,7 @@
         <tr>
             <td></td>
             <td align="right"><small>Age on August 3rd</small></td>  
-            <td>{{ $child->age() }}</td>
+            <td>{{ $child->age_at_start() }}</td>
         </tr>
         <tr>
             <td></td>

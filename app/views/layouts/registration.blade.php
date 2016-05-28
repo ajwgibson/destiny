@@ -104,7 +104,13 @@
 
                 </div>
                 <div class="col-md-4">
-                    <img src="{{ asset('images/destiny-island.jpg') }}" class="img-responsive img-thumbnail" alt="Destiny Island">
+                    
+                    <div class="bottom-20">
+                        <img src="{{ asset('images/destiny-island.jpg') }}" class="img-responsive img-thumbnail" alt="Destiny Island">
+                    </div>
+
+                    @yield('sidebar')
+
                 </div>
             </div>
         </div>

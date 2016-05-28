@@ -69,7 +69,7 @@
             </p>
         </div>
 
-        <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age() > 9 || $child->sleepover ? '' : 'hidden' }}">
+        <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age_at_start() > 9 || $child->sleepover ? '' : 'hidden' }}">
             {{ Form::label('sleepover', 'Attending sleepover', array ('class' => 'control-label')) }}
             <div>
                 <label class="checkbox-inline">{{ Form::checkbox('sleepover', true) }} Yes</label>
