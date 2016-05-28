@@ -19,7 +19,7 @@ Children:
 @foreach ($order->children as $child)
     Name:               {{ $child->name() }}
     Date of birth:      {{ $child->date_of_birth->format('jS F Y') }}
-    Age on August 3rd:  {{ $child->age() }}
+    Age on August 3rd:  {{ $child->age_at_start() }}
     T-shirt size:       {{ $child->tshirt }}
     Dancing:            {{ $child->dancing ? 'Yes' : 'No' }}
     Sleepover:          {{ $child->sleepover ? 'Yes' : 'No' }}

@@ -93,5 +93,10 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
 */
 Route::group(array('prefix' => 'registration', 'namespace' => 'Registration', 'before' => 'auth.registration'), function()
 {
-    Route::get('/', array('as' => 'registration.home', 'uses' => 'HomeController@index'));
+    Route::get( '/',                  array('as' => 'registration.home',     'uses' => 'HomeController@index'));
+    Route::post('/search',            array('as' => 'registration.search',   'uses' => 'HomeController@search'));
+    Route::post('/register',          array('as' => 'registration.register', 'uses' => 'HomeController@register'));
+    Route::get( '/registration/{id}', array('as' => 'registration.show',     'uses' => 'HomeController@show'));
+
+    Route::get('printLabel/{child_id}/{return_url}',  array('as' => 'print.label', 'uses' => 'PrintoutController@printLabel'));
 });
