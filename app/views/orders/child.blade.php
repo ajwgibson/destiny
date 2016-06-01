@@ -13,7 +13,7 @@
 
 <div class="row">
 
-    <section class="col-xs-6">
+    <section class="col-xs-9">
 
         <div class="form-group {{ $errors->has('first_name') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
@@ -42,6 +42,11 @@
                 {{ Form::text('date_of_birth', empty($child->date_of_birth) ? '' : $child->date_of_birth->format('Y-m-d') , array ('class' => 'form-control', 'readonly' => 'readonly')) }}
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
+            <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                The minimum age for a child is 5 years old and the maximum age is 11 years old. Children
+                older than 11 can apply to be junior team members - please contact CCV for more details.
+            </p>
         </div>
 
         <div class="form-group {{ $errors->has('tshirt') ? 'has-error' : null }}">
@@ -63,9 +68,10 @@
                 <label class="checkbox-inline">{{ Form::checkbox('dancing', true) }} Yes</label>
             </div>
             <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
                 This year the children will rotate around the activities in their teams unless 
-                they want to take part in the Dance Group that will run with the same children for 
-                the 3 days. If you want the Dance Activity please tick this option.
+                they want to take part in the dancing activity - that will run with the same children for 
+                all 3 days. If your child wants to take part in the dance activity please tick this option.
             </p>
         </div>
 
@@ -75,6 +81,7 @@
                 <label class="checkbox-inline">{{ Form::checkbox('sleepover', true) }} Yes</label>
             </div>
             <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
                 A child has to be aged 10 or over to attend the sleepover and 
                 there is an additional cost of £6.
             </p>

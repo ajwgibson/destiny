@@ -25,7 +25,7 @@ class Child extends Eloquent {
     public static $validation_rules = array(
         'first_name'         => 'required|max:100',
         'last_name'          => 'required|max:100',
-        'date_of_birth'      => 'required|date',
+        'date_of_birth'      => 'required|date|after:05-08-2004|before:04-08-2011',
         'tshirt'             => 'required',
     );
 
