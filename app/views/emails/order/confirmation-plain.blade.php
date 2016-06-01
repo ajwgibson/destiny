@@ -17,12 +17,15 @@ Contact phone:          {{{ $order->phone }}}
 Children:
 
 @foreach ($order->children as $child)
-    Name:               {{ $child->name() }}
-    Date of birth:      {{ $child->date_of_birth->format('jS F Y') }}
-    Age on August 3rd:  {{ $child->age_at_start() }}
-    T-shirt size:       {{ $child->tshirt }}
-    Dancing:            {{ $child->dancing ? 'Yes' : 'No' }}
-    Sleepover:          {{ $child->sleepover ? 'Yes' : 'No' }}
+    Name:                      {{ $child->name() }}
+    Date of birth:             {{ $child->date_of_birth->format('jS F Y') }}
+    Age on August 3rd:         {{ $child->age_at_start() }}
+    School year in September:  {{ $child->school_year() }}
+    T-shirt size:              {{ $child->tshirt }}
+    Dancing:                   {{ $child->dancing ? 'Yes' : 'No' }}
+    Sleepover:                 {{ $child->sleepover ? 'Yes' : 'No' }}
+    Medical warning:           {{ $child->health_warning ? 'Yes' : 'No' }}
+    Notes:                     {{ $child->notes }}
 
 @endforeach
 

@@ -19,7 +19,9 @@ class Child extends Eloquent {
         'group_name',
         'sleepover',
         'tshirt',
-        'dancing'
+        'dancing',
+        'school_year',
+        'health_warning'
     );
 
     public static $validation_rules = array(
@@ -27,10 +29,16 @@ class Child extends Eloquent {
         'last_name'          => 'required|max:100',
         'date_of_birth'      => 'required|date|after:05-08-2004|before:04-08-2011',
         'tshirt'             => 'required',
+        'school_year'        => 'required|integer|between:2,8',
+        'notes'              => 'required_with:health_warning'
     );
 
     public static $validation_messages = array(
-        'tshirt.required'    => "The T-shirt size field is required.",
+        'tshirt.required'      => "The T-shirt size field is required.",
+        'date_of_birth.after'  => "Children must be under 12.",
+        'date_of_birth.before' => "Children must be 5 or older.",
+        'school_year.min'      => "Children should be starting P2 or above.",
+        'school_year.max'      => "Children should be starting Y8 or lower.",
     );
 
 
@@ -131,6 +139,13 @@ class Child extends Eloquent {
     private function age_on_date($date)
     {
         return $date->diffInYears($this->date_of_birth);
+    }
+
+    // School year as a readable value
+    public function school_year()
+    {
+        if ($this->school_year < 8) return "Primary {$this->school_year}";
+        return "Year {$this->school_year}";
     }
 
 }

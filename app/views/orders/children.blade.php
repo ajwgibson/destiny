@@ -38,9 +38,12 @@
                 <dl class="dl-horizontal">
                     <dt>Date of birth</dt>                     <dd>{{{ $child->date_of_birth->format('jS F Y') }}}</dd>
                     <dt>Age on August 3rd</dt>                 <dd>{{ $child->age_at_start() }}</dd>
+                    <dt>School year in September</dt>          <dd>{{ $child->school_year() }}</dd>
                     <dt>T-shirt size</dt>                      <dd>{{ $child->tshirt }}</dd>
                     <dt>Dancing</dt>                           <dd>{{ HTML::yes_no_icon($child->dancing) }}</dd>
                     <dt>Sleepover</dt>                         <dd>{{ HTML::yes_no_icon($child->sleepover) }}</dd>
+                    <dt>Medical warning</dt>                   <dd>{{ HTML::yes_no_icon($child->health_warning) }}</dd>
+                    <dt>Notes</dt>                             <dd>{{ nl2br($child->notes) }}</dd>
                 </dl>
             </div>
             <div class="panel-footer">

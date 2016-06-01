@@ -59,6 +59,11 @@
         </tr>
         <tr>
             <td></td>
+            <td align="right"><small>School year in September</small></td>  
+            <td>{{ $child->school_year() }}</td>
+        </tr>
+        <tr>
+            <td></td>
             <td align="right"><small>T-shirt size</small></td>       
             <td>{{ $child->tshirt }}</td>
         </tr>
@@ -71,6 +76,16 @@
             <td></td>
             <td align="right"><small>Sleepover</small></td>          
             <td>{{ $child->sleepover ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right"><small>Medical warning</small></td>          
+            <td>{{ $child->health_warning ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right"><small>Notes</small></td>          
+            <td>{{ nl2br($child->notes) }}</td>
         </tr>
         @endforeach
 

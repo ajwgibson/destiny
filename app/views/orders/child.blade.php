@@ -49,6 +49,29 @@
             </p>
         </div>
 
+        <div class="form-group {{ $errors->has('school_year') ? 'has-error' : null }}">
+            {{{ Destiny\ViewHelper::required_icon() }}}
+            {{ Form::label('school_year', 'School year in September', array ('class' => 'control-label')) }}
+            {{ Form::select(
+                    'school_year', 
+                    array ( ''       => 'Select a school year...',
+                            2 => 'Primary 2 (Ages 5-6)',
+                            3 => 'Primary 3 (Ages 6-7)',
+                            4 => 'Primary 4 (Ages 7-8)',
+                            5 => 'Primary 5 (Ages 8-9)',
+                            6 => 'Primary 6 (Ages 9-10)',
+                            7 => 'Primary 7 (Ages 10-11)',
+                            8 => 'Year 8 (Ages 11-12)'),
+                    null, 
+                    array ('class' => 'form-control')) }}
+            <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Please select the school year that the child will enter in September. For children
+                who do not go to school in Northern Ireland, please select an appropriate value
+                based on age.
+            </p>
+        </div>
+
         <div class="form-group {{ $errors->has('tshirt') ? 'has-error' : null }}">
             {{{ Destiny\ViewHelper::required_icon() }}}
             {{ Form::label('tshirt', 'T-shirt size', array ('class' => 'control-label')) }}
@@ -84,6 +107,34 @@
                 <span class="glyphicon glyphicon-info-sign"></span>
                 A child has to be aged 10 or over to attend the sleepover and 
                 there is an additional cost of £6.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="form-group {{ $errors->has('health_warning') ? 'has-error' : null }}">
+            <span class="glyphicon glyphicon-alert control-label"></span>
+            {{ Form::label('health_warning', 'Medical warning', array ('class' => 'control-label')) }}
+            <div>
+                <label class="checkbox-inline">{{ Form::checkbox('health_warning', true) }} Yes</label>
+            </div>
+            <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                If your child has a medical condition that affects the activities they can participate
+                in, the food they can eat or that we should know about for any reason, please tick this
+                box and provide more information in the notes section below.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="form-group {{ $errors->has('notes') ? 'has-error' : null }}">
+            {{ Form::label('notes', 'Notes', array ('class' => 'control-label')) }}
+            {{ Form::textarea('notes', null, array('class' => 'form-control')) }}
+            <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Please include any other information you feel we should know about this child. If you
+                ticked the "Medical warning" box above then you must provide information here.
             </p>
         </div>
 
