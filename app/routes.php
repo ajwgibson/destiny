@@ -91,6 +91,8 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get ('order/summary/{transaction_id}', array('as' => 'admin.order.summary',    'uses' => 'OrderController@summary'));  
     Route::post('order/summary/{transaction_id}', array('as' => 'admin.order.summary.do', 'uses' => 'OrderController@doSummary'));  
 
+    Route::get ('order/confirmation/{transaction_id}', array('as' => 'admin.order.confirmation',    'uses' => 'OrderController@confirmation'));  
+    
     Route::post(  'order/filter',       array('as' => 'admin.order.filter',         'uses' => 'OrderController@filter'));
     Route::get(   'order/resetFilter',  array('as' => 'admin.order.filter.reset',   'uses' => 'OrderController@resetFilter'));
     Route::get(   'order',              array('as' => 'admin.order.index',          'uses' => 'OrderController@index'));

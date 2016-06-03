@@ -386,8 +386,23 @@ class OrderController extends AdminBaseController {
         $order->status = Order::StatusComplete;
         $order->save();
 
-        return Redirect::route('admin.order.index')
-            ->withInfo('Order completed successfully.');
+        return Redirect::route('admin.order.confirmation', array($transaction_id));
+    }
+
+
+    //
+    // Show the confirmation screen at the end of the process
+    //
+    public function confirmation($transaction_id)
+    {
+        $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+
+        $this->layout->with('title', 'Order form');
+        $this->layout->with('subtitle', 'confirmation');
+
+        $this->layout->content = 
+            View::make('admin/orders/confirmation')
+                ->with('order', $order);
     }
 
 }

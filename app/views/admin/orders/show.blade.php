@@ -22,6 +22,16 @@
     </div>
     @endif
 
+    @if ($order->status == Order::StatusComplete)
+    <div class="action">
+        {{ link_to_route(
+                'admin.order.confirmation', 
+                'Print details', 
+                $parameters = array( $order->transaction_id), 
+                $attributes = array( 'class' => 'btn btn-primary')) }}
+    </div>
+    @endif
+
     <div class="action">
         {{ Form::button(
             'Delete this order', 

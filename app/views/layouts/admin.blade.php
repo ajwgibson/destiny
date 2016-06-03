@@ -87,7 +87,7 @@
             </div>
             @endif
 
-            <div class="row bottom-5">
+            <div class="row bottom-5 hidden-print">
                 <div class="col-sm-12">
                     <h1>{{ $title }} @if ($subtitle) <span class="subtitle"><small>&raquo; {{ $subtitle }} @endif</small></span></h1>
                 </div>

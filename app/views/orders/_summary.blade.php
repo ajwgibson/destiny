@@ -38,7 +38,7 @@
 
 <h3><span class="glyphicon glyphicon-gbp"> </span> Price</h3>
 @if ($order->cost() != $order->total())
-<dl class="dl-horizontal">
+<dl class="dl-horizontal hidden-print">
     <dt>Cost</dt>     <dd><span class="price">£{{ money_format('%(#3i', $order->cost()) }}</dd>
     @if ($order->discount() > 0)
     <dt>Discount</dt> <dd><span class="price">£{{ money_format('%(#3i', $order->discount()) }}</dd>
@@ -47,6 +47,9 @@
     <dt>Extra</dt>    <dd><span class="price">£{{ money_format('%(#3i', $order->amount_extra) }}</dd>
     @endif
     <dt>Total</dt>    <dd><span class="price">£{{ money_format('%(#3i', $order->total()) }}</dd>
+</dl>
+<dl class="dl-horizontal visible-print">
+    <dt></dt>  <dd>£{{ money_format('%i', $order->total()) }}</dd>
 </dl>
 @else
 <dl class="dl-horizontal">
