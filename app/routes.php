@@ -70,6 +70,27 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get('user/{user}/editPassword',    array('as' => 'admin.user.editPassword',   'uses' => 'UserController@editPassword'));
     Route::post('user/{user}/updatePassword', array('as' => 'admin.user.updatePassword', 'uses' => 'UserController@updatePassword'));
 
+    Route::get ('order/contact_details/{transaction_id?}', array('as' => 'admin.order.contact_details',    'uses' => 'OrderController@contactDetails'));
+    Route::post('order/contact_details/{transaction_id?}', array('as' => 'admin.order.contact_details.do', 'uses' => 'OrderController@doContactDetails'));
+
+    Route::get ('order/children/{transaction_id}',          array('as' => 'admin.order.children', 'uses' => 'OrderController@children'));  
+    Route::get ('order/child/{transaction_id}/{child_id?}', array('as' => 'admin.order.child',    'uses' => 'OrderController@child'));  
+    Route::post('order/child/{transaction_id}/{child_id?}', array('as' => 'admin.order.child.do', 'uses' => 'OrderController@doChild'));  
+
+    Route::get ('order/remove_child/{transaction_id}/{child_id}', array('as' => 'admin.order.remove.child',    'uses' => 'OrderController@removeChild'));  
+    Route::post('order/remove_child/{transaction_id}/{child_id}', array('as' => 'admin.order.remove.child.do', 'uses' => 'OrderController@doRemoveChild'));  
+            
+    Route::get ('order/permissions/{transaction_id}', array('as' => 'admin.order.permissions',    'uses' => 'OrderController@permissions'));
+    Route::post('order/permissions/{transaction_id}', array('as' => 'admin.order.permissions.do', 'uses' => 'OrderController@doPermissions'));
+            
+    Route::get ('order/voucher/{transaction_id}', array('as' => 'admin.order.voucher',    'uses' => 'OrderController@voucher'));
+    Route::post('order/voucher/{transaction_id}', array('as' => 'admin.order.voucher.do', 'uses' => 'OrderController@doVoucher'));
+
+    Route::post('order/apply_voucher/{transaction_id}', array('as' => 'admin.order.voucher.apply.do', 'uses' => 'OrderController@doApplyVoucher'));
+
+    Route::get ('order/summary/{transaction_id}', array('as' => 'admin.order.summary',    'uses' => 'OrderController@summary'));  
+    Route::post('order/summary/{transaction_id}', array('as' => 'admin.order.summary.do', 'uses' => 'OrderController@doSummary'));  
+
     Route::post(  'order/filter',       array('as' => 'admin.order.filter',         'uses' => 'OrderController@filter'));
     Route::get(   'order/resetFilter',  array('as' => 'admin.order.filter.reset',   'uses' => 'OrderController@resetFilter'));
     Route::get(   'order',              array('as' => 'admin.order.index',          'uses' => 'OrderController@index'));

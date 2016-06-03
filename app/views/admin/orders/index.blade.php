@@ -9,6 +9,14 @@
     </a>
 </div>
 
+<div>
+    {{ link_to_route(
+        'admin.order.contact_details', 
+        'New order', 
+        $parameters = array( ), 
+        $attributes = array( 'class' => 'btn btn-primary')) }}
+</div>
+
 <div class="clearfix"></div>
 
 
@@ -98,13 +106,16 @@
                     <td>
                         @if ($order->amount_paid > 0)
                         £{{ money_format('%(#3i', $order->amount_paid) }}
+                            @if ($order->cash())
+                            <span class="label label-info">cash</span>
+                            @endif
                         @endif
                     </td>
-                    <td>{{{ $order->updated_at->format('d-m-Y H:i:s') }}}</td>
+                    <td>{{{ $order->updated_at->format('d-m-Y H:i') }}}</td>
                     <td>
                         {{ link_to_route(
                             'admin.order.show', 
-                            'Show details', 
+                            'Details', 
                             $parameters = array( 'id' => $order->id), 
                             $attributes = array( 'class' => '')) }}
                     </td>

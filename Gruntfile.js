@@ -44,6 +44,7 @@ module.exports = function(grunt) {
         src: [
           './bower_components/jquery/dist/jquery.js',
           './bower_components/bootstrap/dist/js/bootstrap.js',
+          './bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
           './app/assets/javascript/admin.js'
         ],
         dest: './public/assets/javascript/admin.js',

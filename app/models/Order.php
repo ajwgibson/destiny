@@ -11,11 +11,13 @@ class Order extends Eloquent {
     const StatusNew         = 0;
     const StatusVerified    = 1;
     const StatusComplete    = 2;
+    const StatusCash        = 9;
 
     public static $states = array (
         self::StatusNew        => 'New',
         self::StatusVerified   => 'Verified',
-        self::StatusComplete   => 'Complete'
+        self::StatusComplete   => 'Complete',
+        self::StatusCash       => 'Cash'
     );
 
     protected $table = 'orders';
@@ -108,6 +110,15 @@ class Order extends Eloquent {
     public function total_pence()
     {
         return floor($this->total() * 100);
+    }
+
+    // Was the order paid in cash?
+    public function cash()
+    {
+        return 
+            ($this->status == Order::StatusComplete)
+            && ($this->total() > 0)
+            && !(isset($this->stripe_charge_id));
     }
 
     // Status as a readable value
