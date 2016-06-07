@@ -41,6 +41,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">{{ link_to_route('home', 'HOME') }}</li>
+                        <li class="">{{ link_to_route('faqs', 'FAQS') }}</li>
                     </ul>
                 </div>
             </div>

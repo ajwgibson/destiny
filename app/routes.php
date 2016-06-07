@@ -6,7 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+Route::get('/',     array('as' => 'home', 'uses' => 'HomeController@index'));
+Route::get('/faqs', array('as' => 'faqs', 'uses' => 'HomeController@faqs'));
 
 Route::group(array('prefix' => 'order'), function()
 {
@@ -66,6 +67,10 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
 {
     Route::get('/',    array('as' => 'admin.home',       'uses' => 'HomeController@index'));
     Route::get('user', array('as' => 'admin.user.index', 'uses' => 'UserController@index'));
+    
+    Route::get('faq/up/{id}',   array('as' => 'admin.faq.up',   'uses' => 'FAQController@up'));
+    Route::get('faq/down/{id}', array('as' => 'admin.faq.down', 'uses' => 'FAQController@down'));
+    Route::resource('faq', 'FAQController');
 
     Route::get('user/{user}/editPassword',    array('as' => 'admin.user.editPassword',   'uses' => 'UserController@editPassword'));
     Route::post('user/{user}/updatePassword', array('as' => 'admin.user.updatePassword', 'uses' => 'UserController@updatePassword'));
