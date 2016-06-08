@@ -22,6 +22,11 @@
     <dt>School year in September</dt>          <dd>{{ $child->school_year() }}</dd>
     <dt>T-shirt size</dt>                      <dd>{{ $child->tshirt }}</dd>
     <dt>Dancing</dt>                           <dd>{{ HTML::yes_no_icon($child->dancing) }}</dd>
+    @if (!($child->dancing))
+    <dt>Activity preferences</dt>              <dd>{{ $child->activity_choice_1 }}</dd>
+                                               <dd>{{ $child->activity_choice_2 }}</dd>
+                                               <dd>{{ $child->activity_choice_3 }}</dd>
+    @endif
     <dt>Sleepover</dt>                         <dd>{{ HTML::yes_no_icon($child->sleepover) }}</dd>
     <dt>Medical warning</dt>                   <dd>{{ HTML::yes_no_icon($child->health_warning) }}</dd>
     <dt>Notes</dt>                             <dd>{{ nl2br($child->notes) }}</dd>

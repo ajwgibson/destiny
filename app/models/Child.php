@@ -21,7 +21,10 @@ class Child extends Eloquent {
         'tshirt',
         'dancing',
         'school_year',
-        'health_warning'
+        'health_warning',
+        'activity_choice_1',
+        'activity_choice_2',
+        'activity_choice_3',
     );
 
     public static $validation_rules = array(
@@ -30,7 +33,10 @@ class Child extends Eloquent {
         'date_of_birth'      => 'required|date|after:05-08-2004|before:04-08-2011',
         'tshirt'             => 'required',
         'school_year'        => 'required|integer|between:2,8',
-        'notes'              => 'required_with:health_warning'
+        'notes'              => 'required_with:health_warning',
+        'activity_choice_1'  => 'required_without:dancing',
+        'activity_choice_2'  => 'required_without:dancing',
+        'activity_choice_3'  => 'required_without:dancing',
     );
 
     public static $validation_messages = array(
@@ -39,6 +45,9 @@ class Child extends Eloquent {
         'date_of_birth.before' => "Children must be 5 or older.",
         'school_year.min'      => "Children should be starting P2 or above.",
         'school_year.max'      => "Children should be starting Y8 or lower.",
+        'activity_choice_1.required_without'  => "Activity choices are required for children not picking the dancing activity",
+        'activity_choice_2.required_without'  => "Activity choices are required for children not picking the dancing activity",
+        'activity_choice_3.required_without'  => "Activity choices are required for children not picking the dancing activity",
     );
 
 

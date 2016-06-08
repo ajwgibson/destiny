@@ -72,6 +72,17 @@
             <td align="right"><small>Dancing</small></td>            
             <td>{{ $child->dancing ? 'Yes' : 'No' }}</td>
         </tr>
+@if (!($child->dancing))
+        <tr>
+            <td></td>
+            <td align="right"><small>Activity preferences</small></td>
+            <td>
+                {{ $child->activity_choice_1 }}<br>
+                {{ $child->activity_choice_2 }}<br>
+                {{ $child->activity_choice_3 }}
+            </td>  
+        </tr>
+@endif
         <tr>
             <td></td>
             <td align="right"><small>Sleepover</small></td>          

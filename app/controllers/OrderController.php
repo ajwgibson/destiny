@@ -217,9 +217,6 @@ class OrderController extends BaseController {
 
         $input = Input::all();
 
-        if (!Input::has('sleepover'))      $input['sleepover'] = 0;
-        if (!Input::has('dancing'))        $input['dancing'] = 0;
-
         $validator = Validator::make($input, Child::$validation_rules, Child::$validation_messages);
 
         if ($validator->fails()) {
@@ -229,8 +226,16 @@ class OrderController extends BaseController {
                     ->withErrors($validator);
         }
 
-        // Don't set the "health_warning" value until after the validation as it breaks :(
+        if (!Input::has('sleepover'))      $input['sleepover'] = 0;
         if (!Input::has('health_warning')) $input['health_warning'] = 0;
+
+        if (Input::has('dancing')) {
+            $input['activity_choice_1'] = 'Dancing';
+            $input['activity_choice_2'] = 'Dancing';
+            $input['activity_choice_3'] = 'Dancing';
+        } else {
+            $input['dancing'] = 0;
+        }   
 
         if ($child_id) {
 

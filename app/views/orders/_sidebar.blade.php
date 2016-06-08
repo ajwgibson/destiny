@@ -11,7 +11,9 @@
             @if (isset($order))
                 @if (isset($order->first_name))
                 {{{ $order->first_name . ' ' . $order->last_name }}}<br>
+                @if ($order->email)
                 {{{ $order->email }}}<br>
+                @endif
                 {{{ $order->phone }}}
                 @else
                 <i>Not captured yet</i>

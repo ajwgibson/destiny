@@ -23,6 +23,11 @@ Children:
     School year in September:  {{ $child->school_year() }}
     T-shirt size:              {{ $child->tshirt }}
     Dancing:                   {{ $child->dancing ? 'Yes' : 'No' }}
+@if (!($child->dancing))
+    Activity preferences:      {{ $child->activity_choice_1 }}
+                               {{ $child->activity_choice_2 }}
+                               {{ $child->activity_choice_3 }}
+@endif
     Sleepover:                 {{ $child->sleepover ? 'Yes' : 'No' }}
     Medical warning:           {{ $child->health_warning ? 'Yes' : 'No' }}
     Notes:                     {{ $child->notes }}

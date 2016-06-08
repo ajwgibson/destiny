@@ -92,10 +92,45 @@
             </div>
             <p class="help-block">
                 <span class="glyphicon glyphicon-info-sign"></span>
-                This year the children will rotate around the activities in their teams unless 
+                Children will rotate around activities in their teams unless 
                 they want to take part in the dancing activity - that will run with the same children for 
-                all 3 days. If your child wants to take part in the dance activity please tick this option.
+                all 3 days. If your child wants to take part in the dance activity rather than
+                the other activities please tick this option.
             </p>
+        </div>
+
+        <div id="activity_preferences">
+            <label class="control-label">{{{ Destiny\ViewHelper::required_icon() }}} Other activity preferences</label>
+            <p class="help-block">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Children not doing the dancing activity will rotate around the other activities with their teams. 
+                To help us gauge interest in the various activities and to estimate numbers for each, please indicate
+                a preference between each of the following pairs of activities.
+            </p>
+            <div class="form-group {{ $errors->has('activity_choice_1') ? 'has-error' : null }}">
+                <label for="activity_choice_1" class="control-label"> 
+                    "Pod Racing" or "Gardening with Grow"</label>
+                <div>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_1', 'Pod Racing') }} Pod Racing</label>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_1', 'Gardening with Grow') }} Gardening with Grow</label>
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('activity_choice_2') ? 'has-error' : null }}">
+                <label for="activity_choice_2" class="control-label"> 
+                    "Jedi Training (Nerf)" or "Baking"</label>
+                <div>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_2', 'Jedi Training (Nerf)') }} Jedi Training (Nerf)</label>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_2', 'Baking') }} Baking</label>
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('activity_choice_3') ? 'has-error' : null }}">
+                <label for="activity_choice_3" class="control-label"> 
+                    "Football at Score FC" or "Jewellery Making"</label>
+                <div>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_3', 'Football at Score FC') }} Football at Score FC</label>
+                    <label class="checkbox-inline">{{ Form::radio('activity_choice_3', 'Jewellery Making') }} Jewellery Making</label>
+                </div>
+            </div>
         </div>
 
         <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age_at_start() > 9 || $child->sleepover ? '' : 'hidden' }}">
@@ -193,6 +228,19 @@
             $('#sleepover_section').removeClass('hidden');
         }
         
+    });
+
+    $('#dancing').change(function() {
+        toggleActivityPrefences(this.checked);
+    });
+
+    function toggleActivityPrefences(dancing) {
+        if (dancing) $('#activity_preferences').addClass('hidden');
+        else $('#activity_preferences').removeClass('hidden');
+    }
+
+    $(document).ready(function() {
+        toggleActivityPrefences($('#dancing').is(':checked'));
     });
 
 </script>
