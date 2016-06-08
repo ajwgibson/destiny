@@ -1,5 +1,5 @@
 <img src="{{ asset('images/destiny-island.jpg') }}" class="img-responsive img-thumbnail" alt="Destiny Island">
-<div class="panel">
+<div class="panel panel-transparent">
     <div class="panel-body">
         <address>
             <span class="h3">Destiny Island 2016</span><br>
