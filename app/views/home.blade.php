@@ -16,7 +16,7 @@
         We have an extra for those aged 10 and over; code-named “Destiny HighLand”. This is an 
         opportunity to stay overnight on site from Thursday morning to Friday lunchtime. We will go 
         on ‘mission’ to give the love of Jesus away in the afternoon in our town, then we will 
-        back for food and a sleep over in the church building. All meals will be catered for (£6 extra).
+        be back for food and a sleep over in the church building. All meals will be catered for (£6 extra).
     </p>
         
     <p> 
@@ -66,14 +66,14 @@
                     <div class="col-md-6">
                         <div class="panel panel-info text-center pricing">
                             <div class="panel-heading">
-                                <h3>Conference pass</h3>
+                                <h3>Conference Pass</h3>
                                 <p>£10</p>
                             </div>
                             <div class="panel-body">
                                 <p>
                                     <i>
                                         Entry to our daily sessions packed with awesome games, activities, music, 
-                                        competitions, prizes and more.
+                                        competitions, prizes and more!
                                     </i>
                                 </p>
                             </div>  
@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-info text-center pricing">
                             <div class="panel-heading">
-                                <h3>Destiny High-Land</h3>
+                                <h3>Destiny HighLand</h3>
                                 <p>£6</p>
                             </div>
                             <div class="panel-body">
@@ -101,7 +101,7 @@
                             </div>  
                             <ul class="list-group">
                                 <li class="list-group-item">Thu - Fri</li>
-                                <li class="list-group-item">10am Thursday - 10am Friday</li>
+                                <li class="list-group-item">10am Thursday - 1pm Friday</li>
                                 <li class="list-group-item">Dinner included</li>
                             </ul>
                         </div>
