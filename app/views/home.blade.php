@@ -34,14 +34,14 @@
         {{ link_to_route(
             'order.contact_details', 
             'Continue your booking', 
-            $parameters = array( ), 
+            $parameters = array( Session::get('transaction_id') ), 
             $attributes = array('class' => 'btn btn-primary btn-lg')) }}
 
         {{ link_to_route(
             'order.new', 
             'Start a new booking', 
             $parameters = array( ), 
-            $attributes = array('class' => 'btn btn-default btn-lg')) }}            
+            $attributes = array('class' => 'btn btn-success btn-lg')) }}            
 
         @else
         
@@ -55,57 +55,59 @@
     </p>
 </div>
 
-<div class="row bottom-40">
+<div class="row bottom-10">
     <div class="col-md-12">
         <div class="panel panel-info">
             <div class="panel-heading text-center">
                 <h2>Pricing details</h2>
             </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-info text-center pricing">
-                            <div class="panel-heading">
-                                <h3>Conference Pass</h3>
-                                <p>£10</p>
-                            </div>
-                            <div class="panel-body">
-                                <p>
-                                    <i>
-                                        Entry to our daily sessions packed with awesome games, activities, music, 
-                                        competitions, prizes and more!
-                                    </i>
-                                </p>
-                            </div>  
-                            <ul class="list-group">
-                                <li class="list-group-item">Wed - Fri</li>
-                                <li class="list-group-item">10am - 1pm</li>
-                                <li class="list-group-item">T-Shirt included</li>
-                            </ul>
-                        </div>
+        </div>
+    </div>
+</div>
+<div class="row bottom-20">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-info text-center pricing">
+                    <div class="panel-heading">
+                        <h3>Conference Pass</h3>
+                        <p>£10</p>
                     </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-info text-center pricing">
-                            <div class="panel-heading">
-                                <h3>Destiny HighLand</h3>
-                                <p>£6</p>
-                            </div>
-                            <div class="panel-body">
-                                <p>
-                                    <i>
-                                        Thursday afternoon 'mission' in town followed by
-                                        dinner and an overnight stay in the church.<br>
-                                        (for children aged 10 and older)
-                                    </i>
-                                </p>
-                            </div>  
-                            <ul class="list-group">
-                                <li class="list-group-item">Thu - Fri</li>
-                                <li class="list-group-item">10am Thursday - 1pm Friday</li>
-                                <li class="list-group-item">Dinner included</li>
-                            </ul>
-                        </div>
+                    <div class="panel-body">
+                        <p>
+                            <i>
+                                Entry to our daily sessions packed with awesome games, activities, music, 
+                                competitions, prizes and more!
+                            </i>
+                        </p>
+                    </div>  
+                    <ul class="list-group">
+                        <li class="list-group-item">Wed - Fri</li>
+                        <li class="list-group-item">10am - 1pm</li>
+                        <li class="list-group-item">T-Shirt included</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info text-center pricing">
+                    <div class="panel-heading">
+                        <h3>Destiny HighLand</h3>
+                        <p>£6</p>
                     </div>
+                    <div class="panel-body">
+                        <p>
+                            <i>
+                                Thursday afternoon 'mission' in town followed by
+                                dinner and an overnight stay in the church.<br>
+                                (for children aged 10 and older)
+                            </i>
+                        </p>
+                    </div>  
+                    <ul class="list-group">
+                        <li class="list-group-item">Thu - Fri</li>
+                        <li class="list-group-item">10am Thursday - 1pm Friday</li>
+                        <li class="list-group-item">Dinner included</li>
+                    </ul>
                 </div>
             </div>
         </div>

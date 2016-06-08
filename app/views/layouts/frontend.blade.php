@@ -98,7 +98,15 @@
                 </div>
 
             </div>
+
+            
         </div>
+
+        <footer class="footer">
+                <div class="container">
+                    <p class="text-muted">&copy; 2016 CAUSEWAY COAST VINEYARD. ALL RIGHTS RESERVED.</p>
+                </div>
+            </footer>
     </div>
 
     <!-- JavaScript placed at the end of the document so the pages load faster -->
