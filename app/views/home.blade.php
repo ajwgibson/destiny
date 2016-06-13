@@ -4,7 +4,9 @@
 
 <div class="jumbotron">
 
-    <h1>The Kids Awaken</h1>
+    <h1>Destiny Island</h1>
+    
+    <h2>The Kids Awaken</h2>
 
     <p>
         Each morning, 10am to 1pm will be packed with awesome games, activities, music, 

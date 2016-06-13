@@ -4,6 +4,8 @@
 
 //styles specific for the frontend 
 
+@navbar-height:                    80px;
+
 html {
   position: relative;
   min-height: 100%;
@@ -11,11 +13,24 @@ html {
 
 body {
   /* Set the fixed height of the footer here */
-  margin-bottom: 60px;
+  margin-bottom: 100px;
   background-color: lighten(@gray-base, 85%);
 }
 
+.navbar {
+  font-family: "proxima-nova", @font-family-sans-serif;
+}
+
+.navbar-logo {
+  max-width: 300px;
+
+  img {
+    margin-top: 20px;
+  }
+}
+
 #main-content {
+  padding-top: 100px;
 }
 
 .footer {
@@ -26,7 +41,7 @@ body {
   color: #bfbfbf;
 
   /* Set the fixed height of the footer here */
-  height: 40px;
+  height: 80px;
 
   .container {
     margin-top: 10px;
