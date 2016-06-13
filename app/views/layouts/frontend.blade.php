@@ -15,7 +15,7 @@
 
     <script type="text/javascript" src="//use.typekit.net/ik/Q3jd9lYe1tkUjh4E4N6KU9l8gsIsmg4WYtgLKUj9-pIfe0bffFHN4UJLFRbh52jhWD9DwQwt5ABKZQsKw2IojD9kZQwDZR9u5gTaiaiaOcFyiWF8ihBojhNySash-Ao8pABkZfoRdhXCjhBuShmajW8RdhBDiYZTdcmojW4qOcFzdPUCdhFydeyzSabCjhFhjhyuScFGO1FUiABkZWF3jAF8OcFzdP37OcFRicFGiW4R-foDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJHjcmKjWwldcmuZPG4fHCgIMMjMPMfH6qJnMIbMg6OJMJ7fbRKHyMMeMw6MKG4f5w7IMMj2PMfH6qJn3IbMg6IJMJ7fbK3MsMMeMt6MKG4fHXgIMMjgKMfH6qJn6IbMg6bJMJ7fbKOMsMMeMS6MKG4fJ3gIMMjIPMfH6qJ7bIbMg6JJMJ7fbK7MsMMegJ6MKG4fJqgIMMjfPMfH6qJK6IbMg6QJMJ7fbRL-gMgeMb6MTMg3SnhnM9.js"></script>
     <link rel="stylesheet" href="https://use.typekit.net/c/589bca/1w;bebas-neue,2,bCT:W:n4;proxima-nova,2,2clzCL:W:i1,2clzCB:W:i3,2clzCG:W:i4,2clzCJ:W:i6,2clzC6:W:i7,2clzC8:W:i8,2clzC4:W:i9,2clzCK:W:n1,2clzC9:W:n3,2clzCF:W:n4,2clzCH:W:n6,2clzC5:W:n7,2clzC7:W:n8,2clzC3:W:n9/l" media="all">
-    <script type="text/javascript">Typekit.load();</script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
