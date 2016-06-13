@@ -32,7 +32,8 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+//Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useDailyFiles(storage_path().'/logs/laravel.log', 0, Config::get('app.logging_level'));
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
-    //return Response::view('errors.other', array('error_code' => $code), $code);
+    return Response::view('errors.other', array('error_code' => $code), $code);
 });
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
