@@ -45,6 +45,7 @@ module.exports = function(grunt) {
           './bower_components/jquery/dist/jquery.js',
           './bower_components/bootstrap/dist/js/bootstrap.js',
           './bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+          './bower_components/Chart.js/dist/Chart.bundle.js',
           './app/assets/javascript/admin.js'
         ],
         dest: './public/assets/javascript/admin.js',
@@ -53,6 +54,7 @@ module.exports = function(grunt) {
         src: [
           './bower_components/jquery/dist/jquery.js',
           './bower_components/bootstrap/dist/js/bootstrap.js',
+          './bower_components/Chart.js/dist/Chart.js',
           './app/assets/javascript/registration.js'
         ],
         dest: './public/assets/javascript/registration.js',

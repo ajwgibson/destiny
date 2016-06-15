@@ -51,6 +51,17 @@ class Child extends Eloquent {
     );
 
 
+    public static $school_years = array( 
+        '' => 'Select a school year...',
+        2  => 'Primary 2 (Ages 5-6)',
+        3  => 'Primary 3 (Ages 6-7)',
+        4  => 'Primary 4 (Ages 7-8)',
+        5  => 'Primary 5 (Ages 8-9)',
+        6  => 'Primary 6 (Ages 9-10)',
+        7  => 'Primary 7 (Ages 10-11)',
+        8  => 'Year 8 (Ages 11-12)'
+    );
+
 
     // Define which properties should be treated as dates
     public function getDates()
@@ -153,8 +164,13 @@ class Child extends Eloquent {
     // School year as a readable value
     public function school_year()
     {
-        if ($this->school_year < 8) return "Primary {$this->school_year}";
-        return "Year {$this->school_year}";
+        return $this::$school_years[$this->school_year];
+    }
+
+    public static function get_school_year($school_year)
+    {
+        if (!array_key_exists($school_year, Child::$school_years)) return 'N/A';
+        else return Child::$school_years[$school_year];
     }
 
 }

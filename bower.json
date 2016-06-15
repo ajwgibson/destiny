@@ -2,6 +2,7 @@
   "name": "destiny",
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "bootstrap-datepicker": "^1.6.1"
+    "bootstrap-datepicker": "^1.6.1",
+    "Chart.js": "^2.1.5"
   }
 }

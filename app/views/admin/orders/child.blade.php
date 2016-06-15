@@ -47,14 +47,7 @@
                     {{ Form::label('school_year', 'School year in September', array ('class' => 'control-label')) }}
                     {{ Form::select(
                             'school_year', 
-                            array ( ''       => 'Select a school year...',
-                                    2 => 'Primary 2 (Ages 5-6)',
-                                    3 => 'Primary 3 (Ages 6-7)',
-                                    4 => 'Primary 4 (Ages 7-8)',
-                                    5 => 'Primary 5 (Ages 8-9)',
-                                    6 => 'Primary 6 (Ages 9-10)',
-                                    7 => 'Primary 7 (Ages 10-11)',
-                                    8 => 'Year 8 (Ages 11-12)'),
+                            Child::$school_years,
                             null, 
                             array ('class' => 'form-control')) }}
                     <p class="help-block">
