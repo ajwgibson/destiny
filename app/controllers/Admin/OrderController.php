@@ -387,6 +387,8 @@ class OrderController extends AdminBaseController {
         }
 
         $order = Order::where('transaction_id', $transaction_id)->firstOrFail();
+        $order->amount_due  = $order->cost();
+        $order->discount    = $order->discount();
         $order->amount_paid = $order->total();
         $order->status = Order::StatusComplete;
         $order->save();

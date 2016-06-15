@@ -70,6 +70,20 @@ class Order extends Eloquent {
         return $this->hasOne('Voucher');
     }
 
+
+    // Query scope
+    public function scopeConfirmed($query)
+    {
+        return $query->where('status', Order::StatusComplete); 
+    }
+
+    // Query scope
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', '<>', Order::StatusComplete); 
+    }
+
+
     // Name
     public function name()
     {

@@ -20,9 +20,9 @@ class HomeController extends AdminBaseController {
         $this->layout->with('subtitle', '');
 
 
-        // Simple order counts
-        $orders_total = Order::where('status', Order::StatusComplete)->count();
-        $orders_in_progress = Order::where('status', '<>', Order::StatusComplete)->count();
+        // Order counts
+        $orders_total = Order::confirmed()->count();
+        $orders_in_progress = Order::inProgress()->count();
 
         $cumulative_orders = 
             DB::table('v_cumulative_orders_by_date')
@@ -35,6 +35,7 @@ class HomeController extends AdminBaseController {
         $cumulative_data = array();
 
         foreach($cumulative_orders as $key => $val) {
+            // Only include entries with common dates
             if (array_key_exists($key, $cumulative_children)) {
                 $cumulative_data[] = array(
                     'date' => $key,
@@ -46,28 +47,64 @@ class HomeController extends AdminBaseController {
 
         // Financials
         $payments_online = 
-            Order::where('status', Order::StatusComplete)
+            Order::confirmed()
                 ->whereNotNull('stripe_charge_id')
                 ->sum('amount_paid');
 
         $payments_cash = 
-            Order::where('status', Order::StatusComplete)
+            Order::confirmed()
                 ->whereNull('stripe_charge_id')
                 ->sum('amount_paid');
 
         $payments_total =
-            Order::where('status', Order::StatusComplete)
+            Order::confirmed()
                 ->sum('amount_paid');
 
 
         // Statistics about children
         $children_by_school_year = 
-            Child::whereHas('order', function($q) { 
-                $q->where('status', Order::StatusComplete); 
-            })->select(DB::raw('count(*) as school_year_count, school_year'))
-              ->groupBy('school_year')
-              ->orderBy('school_year')
-              ->get();
+            Child::confirmed()
+                ->select(DB::raw('count(*) as school_year_count, school_year'))
+                ->groupBy('school_year')
+                ->orderBy('school_year')
+                ->get();
+
+        // Statistics about activities
+        $dancing_data = array(
+            'yes' => Child::confirmed()->dancing()->count(),
+            'no'  => Child::confirmed()->notDancing()->count()
+        );
+
+        $activity_choice_1 =
+            Child::confirmed()
+                ->notDancing()
+                ->select(DB::raw('activity_choice_1, count(id) as activity_choice_1_count'))
+                ->groupBy('activity_choice_1')
+                ->lists('activity_choice_1_count', 'activity_choice_1');
+
+        $activity_choice_2 =
+            Child::confirmed()
+                ->notDancing()
+                ->select(DB::raw('activity_choice_2, count(id) as activity_choice_2_count'))
+                ->groupBy('activity_choice_2')
+                ->lists('activity_choice_2_count', 'activity_choice_2');
+
+        $activity_choice_3 =
+            Child::confirmed()
+                ->notDancing()
+                ->select(DB::raw('activity_choice_3, count(id) as activity_choice_3_count'))
+                ->groupBy('activity_choice_3')
+                ->lists('activity_choice_3_count', 'activity_choice_3');
+
+        // Miscellaneous
+        $tshirts = 
+            Child::confirmed()
+                ->select(DB::raw('tshirt, count(id) as tshirt_count'))
+                ->groupBy('tshirt')
+                ->lists('tshirt_count', 'tshirt');
+
+        $extra_payments = Order::confirmed()->sum('amount_extra');
+        $discounts      = Order::confirmed()->sum('discount');
 
         $this->layout->content = 
             View::make('admin/index')
@@ -77,7 +114,14 @@ class HomeController extends AdminBaseController {
                 ->with('payments_online',         $payments_online)
                 ->with('payments_cash',           $payments_cash)
                 ->with('payments_total',          $payments_total)
-                ->with('children_by_school_year', $children_by_school_year);
+                ->with('children_by_school_year', $children_by_school_year)
+                ->with('dancing_data',            $dancing_data)
+                ->with('activity_choice_1',       $activity_choice_1)
+                ->with('activity_choice_2',       $activity_choice_2)
+                ->with('activity_choice_3',       $activity_choice_3)
+                ->with('tshirts',                 $tshirts)
+                ->with('extra_payments',          $extra_payments)
+                ->with('discounts',               $discounts);
     }
 
 }

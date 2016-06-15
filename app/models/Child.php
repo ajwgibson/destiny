@@ -85,6 +85,25 @@ class Child extends Eloquent {
         return $this->hasMany('Registration');
     }
 
+    // Query scope
+    public function scopeConfirmed($query)
+    {
+        return $query->whereHas('order', function($q) { 
+            $q->where('status', Order::StatusComplete); 
+        });
+    }
+
+    // Query scope
+    public function scopeDancing($query)
+    {
+        return $query->where('dancing', 1);
+    }
+
+    // Query scope
+    public function scopeNotDancing($query)
+    {
+        return $query->where('dancing', '<>', 1);
+    }
 
 
     // Returns the most recent registration record for this child (if any)

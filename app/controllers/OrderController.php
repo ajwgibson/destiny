@@ -460,6 +460,8 @@ class OrderController extends BaseController {
 
                 $order->status = Order::StatusComplete;
                 $order->stripe_charge_id = $charge->id;
+                $order->amount_due  = $order->cost();
+                $order->discount    = $order->discount();
                 $order->amount_paid = $order->total();
                 $order->save();
 
