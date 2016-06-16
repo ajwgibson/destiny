@@ -113,6 +113,11 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::post(  'voucher/{id}/update',  array('as' => 'admin.voucher.update',         'uses' => 'VoucherController@update'));
     Route::get(   'voucher/{id}',         array('as' => 'admin.voucher.show',           'uses' => 'VoucherController@show'));
     Route::delete('voucher/{id}/destroy', array('as' => 'admin.voucher.destroy',        'uses' => 'VoucherController@destroy'));
+
+    Route::post(  'child/filter',       array('as' => 'admin.child.filter',         'uses' => 'ChildController@filter'));
+    Route::get(   'child/resetFilter',  array('as' => 'admin.child.filter.reset',   'uses' => 'ChildController@resetFilter'));
+    Route::get(   'child',              array('as' => 'admin.child.index',          'uses' => 'ChildController@index'));
+    
 });
 
 

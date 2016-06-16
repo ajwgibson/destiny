@@ -162,7 +162,7 @@ class Child extends Eloquent {
         return $this->first_name . ' ' . $this->last_name;
     }
     
-    // Age at the start of Destiny Island
+    // Age today
     public function age()
     {
         return $this->age_on_date(new Carbon());
@@ -183,7 +183,8 @@ class Child extends Eloquent {
     // School year as a readable value
     public function school_year()
     {
-        return $this::$school_years[$this->school_year];
+        if (!array_key_exists($this->school_year, Child::$school_years)) return 'N/A';
+        else return $this::$school_years[$this->school_year];
     }
 
     public static function get_school_year($school_year)
