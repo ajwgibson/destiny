@@ -61,7 +61,7 @@
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>School year &amp; age (on August 3rd)</th>
+                    <th>School year &amp; age</th>
                     <th>Destiny HighLand</th>
                     <th>Activities</th>
                     <th>Health warning</th>
@@ -73,7 +73,7 @@
                 <tr>
                     <td>{{{ $child->first_name }}}</code></td>
                     <td>{{{ $child->last_name }}}</code></td>
-                    <td>{{{ $child->school_year() }}}<br>({{{ $child->age_at_start() }}})</td>
+                    <td>{{{ $child->short_school_year() }}} ({{{ $child->age_at_start() }}})</td>
                     <td>{{ HTML::yes_no_icon($child->sleepover) }}</td>
                     <td>
                         @if ($child->dancing)
