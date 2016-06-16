@@ -56,50 +56,52 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>School year &amp; age</th>
-                    <th>Destiny HighLand</th>
-                    <th>Activities</th>
-                    <th>Health warning</th>
-                    <th>Order</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($children as $child)
-                <tr>
-                    <td>{{{ $child->first_name }}}</code></td>
-                    <td>{{{ $child->last_name }}}</code></td>
-                    <td>{{{ $child->short_school_year() }}} ({{{ $child->age_at_start() }}})</td>
-                    <td>{{ HTML::yes_no_icon($child->sleepover) }}</td>
-                    <td>
-                        @if ($child->dancing)
-                        Dancing
-                        @else
-                        {{{ $child->activity_choice_1 }}}<br>
-                        {{{ $child->activity_choice_2 }}}<br>
-                        {{{ $child->activity_choice_3 }}}
-                        @endif
-                    </td>
-                    <td>
-                        @if ($child->health_warning)
-                        <span class="text-danger"><span class="glyphicon glyphicon-alert"></span> </span>
-                        @endif
-                    </td>
-                    <td>
-                        {{ link_to_route(
-                            'admin.order.show', 
-                            $child->order->name(), 
-                            $parameters = array( 'id' => $child->order->id), 
-                            $attributes = array( 'class' => '')) }}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>School year &amp; age</th>
+                        <th>Destiny HighLand</th>
+                        <th>Activities</th>
+                        <th>Health warning</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($children as $child)
+                    <tr>
+                        <td>{{{ $child->first_name }}}</code></td>
+                        <td>{{{ $child->last_name }}}</code></td>
+                        <td>{{{ $child->short_school_year() }}} ({{{ $child->age_at_start() }}})</td>
+                        <td>{{ HTML::yes_no_icon($child->sleepover) }}</td>
+                        <td>
+                            @if ($child->dancing)
+                            Dancing
+                            @else
+                            {{{ $child->activity_choice_1 }}}<br>
+                            {{{ $child->activity_choice_2 }}}<br>
+                            {{{ $child->activity_choice_3 }}}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($child->health_warning)
+                            <span class="text-danger"><span class="glyphicon glyphicon-alert"></span> </span>
+                            @endif
+                        </td>
+                        <td>
+                            {{ link_to_route(
+                                'admin.order.show', 
+                                $child->order->name(), 
+                                $parameters = array( 'id' => $child->order->id), 
+                                $attributes = array( 'class' => '')) }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

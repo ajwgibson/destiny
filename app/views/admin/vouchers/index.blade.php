@@ -70,44 +70,46 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Voucher code</th>
-                    <th>Discount</th>
-                    <th>Limit (children)</th>
-                    <th>Order</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($vouchers as $voucher)
-                <tr>
-                    <td><code>{{{ $voucher->code }}}</code></td>
-                    <td>{{{ $voucher->discount }}}%</td>
-                    <td>{{{ $voucher->child_limit }}}</td>
-                    <td>
-                    @if ($voucher->order)
-                        {{ link_to_route(
-                            'admin.order.show', 
-                            $voucher->order->name(), 
-                            $parameters = array( 'id' => $voucher->order->id), 
-                            $attributes = array( 'class' => '')) }}
-                    @else
-                        <i>Not used yet</i>
-                    @endif
-                    </td>
-                    <td>
-                        {{ link_to_route(
-                            'admin.voucher.show', 
-                            'Show details', 
-                            $parameters = array( 'id' => $voucher->id), 
-                            $attributes = array( 'class' => '')) }}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Voucher code</th>
+                        <th>Discount</th>
+                        <th>Limit (children)</th>
+                        <th>Order</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($vouchers as $voucher)
+                    <tr>
+                        <td><code>{{{ $voucher->code }}}</code></td>
+                        <td>{{{ $voucher->discount }}}%</td>
+                        <td>{{{ $voucher->child_limit }}}</td>
+                        <td>
+                        @if ($voucher->order)
+                            {{ link_to_route(
+                                'admin.order.show', 
+                                $voucher->order->name(), 
+                                $parameters = array( 'id' => $voucher->order->id), 
+                                $attributes = array( 'class' => '')) }}
+                        @else
+                            <i>Not used yet</i>
+                        @endif
+                        </td>
+                        <td>
+                            {{ link_to_route(
+                                'admin.voucher.show', 
+                                'Show details', 
+                                $parameters = array( 'id' => $voucher->id), 
+                                $attributes = array( 'class' => '')) }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

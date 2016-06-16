@@ -72,57 +72,59 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Contact name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Children</th>
-                    <th>Status</th>
-                    <th>Voucher</th>
-                    <th>Paid</th>
-                    <th>Last updated</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $order)
-                <tr>
-                    <td>{{{ $order->name() }}}</td>
-                    <td>{{{ $order->email }}}</td>
-                    <td>{{{ $order->phone }}}</td>
-                    <td>
-                    @foreach ($order->children as $child)
-                        {{{ $child->name() }}}<br/>
-                    @endforeach
-                    </td>
-                    <td>{{{ $order->status() }}}</td>
-                    <td>
-                        @if ($order->voucher)
-                        <code>{{{ $order->voucher->code }}}</code>
-                        @endif
-                    </td>
-                    <td>
-                        @if ($order->amount_paid > 0)
-                        £{{ money_format('%(#3i', $order->amount_paid) }}
-                            @if ($order->cash())
-                            <span class="label label-info">cash</span>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Contact name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Children</th>
+                        <th>Status</th>
+                        <th>Voucher</th>
+                        <th>Paid</th>
+                        <th>Last updated</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($orders as $order)
+                    <tr>
+                        <td>{{{ $order->name() }}}</td>
+                        <td>{{{ $order->email }}}</td>
+                        <td>{{{ $order->phone }}}</td>
+                        <td>
+                        @foreach ($order->children as $child)
+                            {{{ $child->name() }}}<br/>
+                        @endforeach
+                        </td>
+                        <td>{{{ $order->status() }}}</td>
+                        <td>
+                            @if ($order->voucher)
+                            <code>{{{ $order->voucher->code }}}</code>
                             @endif
-                        @endif
-                    </td>
-                    <td>{{{ $order->updated_at->format('d-m-Y H:i') }}}</td>
-                    <td>
-                        {{ link_to_route(
-                            'admin.order.show', 
-                            'Details', 
-                            $parameters = array( 'id' => $order->id), 
-                            $attributes = array( 'class' => '')) }}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            @if ($order->amount_paid > 0)
+                            £{{ money_format('%(#3i', $order->amount_paid) }}
+                                @if ($order->cash())
+                                <span class="label label-info">cash</span>
+                                @endif
+                            @endif
+                        </td>
+                        <td>{{{ $order->updated_at->format('d-m-Y H:i') }}}</td>
+                        <td>
+                            {{ link_to_route(
+                                'admin.order.show', 
+                                'Details', 
+                                $parameters = array( 'id' => $order->id), 
+                                $attributes = array( 'class' => '')) }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
