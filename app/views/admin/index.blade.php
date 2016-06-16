@@ -20,6 +20,11 @@
                     <li class="list-group-item"><span class="badge money">£{{{ money_format('%#5i', $payments_cash) }}}</span> Cash</li>
                     <li class="list-group-item list-group-item-success"><span class="badge money">£{{{ money_format('%#5i', $payments_total) }}}</span> Total</li>
                 </ul>
+
+                <ul class="list-group">
+                    <li class="list-group-item"><h4>Destiny HighLand</h4></li>
+                    <li class="list-group-item"><span class="badge">{{ $sleepover_count }}</span> Tickets sold</li>
+                </ul>
             </div>
             <div class="col-sm-6 col-md-3">
                 <ul class="list-group">

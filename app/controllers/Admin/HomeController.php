@@ -69,6 +69,8 @@ class HomeController extends AdminBaseController {
                 ->orderBy('school_year')
                 ->get();
 
+        $sleepover_count = Child::confirmed()->where('sleepover', 1)->count();
+
         // Statistics about activities
         $dancing_data = array(
             'yes' => Child::confirmed()->dancing()->count(),
@@ -121,7 +123,8 @@ class HomeController extends AdminBaseController {
                 ->with('activity_choice_3',       $activity_choice_3)
                 ->with('tshirts',                 $tshirts)
                 ->with('extra_payments',          $extra_payments)
-                ->with('discounts',               $discounts);
+                ->with('discounts',               $discounts)
+                ->with('sleepover_count',         $sleepover_count);
     }
 
 }
