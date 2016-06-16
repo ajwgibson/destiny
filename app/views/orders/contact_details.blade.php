@@ -7,9 +7,8 @@
 <div class="row">
     <section class="col-xs-10">
         <p class="lead">
-            The information you enter on this page will also be used as contact details
-            for the children you are booking places for. Their details will be entered on
-            subsequent screens.
+            Please enter <strong><em>your</em></strong> contact details here.
+            Children's details will be entered separately on subsequent screens.
         </p>
     </section>
 </div>

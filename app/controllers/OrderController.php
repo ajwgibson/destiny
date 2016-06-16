@@ -165,11 +165,20 @@ class OrderController extends BaseController {
     public function doAuthentication($transaction_id)
     {
         $email = Input::get('email');
+        
         $order = Order::where('transaction_id', $transaction_id)
                     ->where('email', $email)
-                    ->firstOrFail();
+                    ->first();
+        
+        if (!$order) {
+            return 
+                Redirect::route('order.authentication', array($transaction_id))
+                    ->withMessage('Invalid email address');
+        }
+
         Session::put('transaction_id', $transaction_id);
         return Redirect::route('order.contact_details', array($transaction_id));
+
     }
 
 

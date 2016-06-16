@@ -28,7 +28,7 @@ Children:
                                {{ $child->activity_choice_2 }}
                                {{ $child->activity_choice_3 }}
 @endif
-    Sleepover:                 {{ $child->sleepover ? 'Yes' : 'No' }}
+    Destiny HighLand:          {{ $child->sleepover ? 'Yes' : 'No' }}
     Medical warning:           {{ $child->health_warning ? 'Yes' : 'No' }}
     Notes:                     {{ $child->notes }}
 

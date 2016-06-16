@@ -118,13 +118,13 @@
                 </div>
 
                 <div id="sleepover_section" class="form-group {{ $errors->has('sleepover') ? 'has-error' : null }} {{ $child->age_at_start() > 9 || $child->sleepover ? '' : 'hidden' }}">
-                    {{ Form::label('sleepover', 'Attending sleepover', array ('class' => 'control-label')) }}
+                    {{ Form::label('sleepover', 'Attending Destiny HighLand', array ('class' => 'control-label')) }}
                     <div>
                         <label class="checkbox-inline">{{ Form::checkbox('sleepover', true) }} Yes</label>
                     </div>
                     <p class="help-block">
                         <span class="glyphicon glyphicon-info-sign"></span>
-                        A child has to be aged 10 or over to attend the sleepover and 
+                        A child has to be aged 10 or over to attend Destiny HighLand and 
                         there is an additional cost of £6.
                     </p>
                 </div>

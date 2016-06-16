@@ -13,7 +13,7 @@
         <p class="lead">
             Discount voucher <code>{{ $order->voucher->code }}</code> has been applied to this order,
             resulting in a total discount of <code>£{{ money_format('%i', $order->discount()) }}</code>. Please 
-            note that discounts will only be applied to daytime tickets and not to sleepover tickets.
+            note that discounts will only be applied to conference passes and not to Destiny HighLand tickets.
         </p>
     </section>
 </div>
@@ -25,8 +25,8 @@
         <p class="lead">
             If you have a discount voucher please use it now. Only one voucher can be used
             on an order and a voucher can only be used once. If you do not have a voucher, please 
-            proceed to the next step. Please note that discounts will only be applied to daytime tickets
-            and not to sleepover tickets.
+            proceed to the next step. Please note that discounts will only be applied to conference passes
+            and not to Destiny HighLand tickets.
         </p>
     </section>
 </div>

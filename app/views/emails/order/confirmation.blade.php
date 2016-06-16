@@ -85,7 +85,7 @@
 @endif
         <tr>
             <td></td>
-            <td align="right"><small>Sleepover</small></td>          
+            <td align="right"><small>Destiny HighLand</small></td>          
             <td>{{ $child->sleepover ? 'Yes' : 'No' }}</td>
         </tr>
         <tr>

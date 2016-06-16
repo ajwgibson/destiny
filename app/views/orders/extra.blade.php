@@ -11,7 +11,7 @@
             For some families the cost of Destiny Island can seem a little daunting, so this year we're
             providing vouchers to make it a little more affordable for them.
             If you feel you can contribute towards the cost of those vouchers we'd love to give you 
-            the opportunity to do so. 
+            the opportunity to do that. 
             Just select one of the additional contribution amounts below and we'll add it
             to your payment. 
         </p>

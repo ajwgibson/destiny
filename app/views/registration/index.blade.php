@@ -48,9 +48,9 @@
                                 <dd>{{{ $child->age() }}}</dd>
                                 <dt>School year (in September)</dt>
                                 <dd>{{{ $child->school_year }}}</dd>
-                                <dt>Dance activity?</dt>
+                                <dt>Dance activity</dt>
                                 <dd>{{ HTML::yes_no_icon($child->dancing) }}</dd>
-                                <dt>Sleepover?</dt>
+                                <dt>Destiny HighLand</dt>
                                 <dd>{{ HTML::yes_no_icon($child->sleepover) }}</dd>
                             </dl>
                         </div>

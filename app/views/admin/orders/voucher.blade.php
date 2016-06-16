@@ -9,7 +9,7 @@
                 <p class="lead">
                     Discount voucher <code>{{ $order->voucher->code }}</code> has been applied to this order,
                     resulting in a total discount of <code>£{{ money_format('%i', $order->discount()) }}</code>. 
-                    Discounts are only applied to daytime tickets and not to sleepover tickets.
+                    Discounts are only applied to conference passes and not to Destiny HighLand tickets.
                 </p>
             </section>
         </div>
@@ -19,8 +19,8 @@
         <div class="row">
             <section class="col-xs-10">
                 <p class="lead">
-                    Please note that discounts will only be applied to daytime tickets
-                    and not to sleepover tickets.
+                    Please note that discounts will only be applied to conference passes
+                    and not to Destiny HighLand tickets.
                 </p>
             </section>
         </div>
