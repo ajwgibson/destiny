@@ -112,7 +112,9 @@
                                 @endif
                             @endif
                         </td>
-                        <td>{{{ $order->updated_at->format('d-m-Y H:i') }}}</td>
+                        <td>
+                            {{{ Destiny\ViewHelper::london_time($order->updated_at) }}}
+                        </td>
                         <td>
                             {{ link_to_route(
                                 'admin.order.show', 

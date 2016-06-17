@@ -16,4 +16,9 @@ class ViewHelper {
     {
         echo '<span class="glyphicon glyphicon-asterisk control-label"></span> ';
     }
+
+    public static function london_time($value)
+    {
+        return $value->setTimezone('Europe/London')->format('d-m-Y H:i');
+    }
 }
