@@ -73,6 +73,16 @@ class Child extends Eloquent {
     );
 
 
+    public static $teams = array( 
+        1  => 'Team Skywalker',
+        2  => 'Team Solo',
+        3  => 'Team Chewbacca',
+        4  => 'Team Rey',
+        5  => 'Team Finn',
+        6  => 'Team Poe',
+    );
+
+
     // Define which properties should be treated as dates
     public function getDates()
     {
@@ -113,6 +123,19 @@ class Child extends Eloquent {
     public function scopeNotDancing($query)
     {
         return $query->where('dancing', '<>', 1);
+    }
+
+    // Query scope
+    public function scopeCanBeAssignedToTeam($query)
+    {
+        $friends = 
+            Child::whereNotNull('friend_id')
+                ->select('friend_id')
+                ->lists('friend_id');
+
+        return 
+            $query->whereNull('friend_id')
+                  ->whereNotIn('id', $friends);
     }
 
 
@@ -208,6 +231,20 @@ class Child extends Eloquent {
     {
         if (!array_key_exists($school_year, Child::$school_years)) return 'N/A';
         else return Child::$school_years[$school_year];
+    }
+
+    // Team name
+    public function team_name()
+    {
+        if (!isset($this->team) || !array_key_exists($this->team, Child::$teams)) return 'Not assigned yet';
+        else return $this::$teams[$this->team];
+    }
+
+    // Team name
+    public static function get_team_name($team)
+    {
+        if (!isset($team) || !array_key_exists($team, Child::$teams)) return 'Not assigned yet';
+        else return Child::$teams[$team];
     }
 
 }

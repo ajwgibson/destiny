@@ -71,6 +71,21 @@ class HomeController extends AdminBaseController {
 
         $sleepover_count = Child::confirmed()->where('sleepover', 1)->count();
 
+        $children_by_team = 
+            Child::confirmed()
+                ->whereNotNull('team')
+                ->select(DB::raw('count(*) as team_count, team'))
+                ->groupBy('team')
+                ->orderBy('team')
+                ->lists('team_count', 'team');
+        
+        foreach (array_keys(Child::$teams) as $key) {
+            if (array_key_exists($key, $children_by_team)) {
+                $children_by_team[Child::get_team_name($key)] = $children_by_team[$key];
+                unset($children_by_team[$key]);
+            }
+        }
+
         // Statistics about activities
         $dancing_data = array(
             'yes' => Child::confirmed()->dancing()->count(),
@@ -124,7 +139,8 @@ class HomeController extends AdminBaseController {
                 ->with('tshirts',                 $tshirts)
                 ->with('extra_payments',          $extra_payments)
                 ->with('discounts',               $discounts)
-                ->with('sleepover_count',         $sleepover_count);
+                ->with('sleepover_count',         $sleepover_count)
+                ->with('children_by_team',        $children_by_team);
     }
 
 }

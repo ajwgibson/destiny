@@ -9,6 +9,21 @@
     </a>
 </div>
 
+<div>
+    {{ Form::open(
+        array(
+            'route' => array('admin.child.assign'),
+            'class' => 'assign' ) ) }}
+
+    {{ Form::button(
+        'Assign children to teams', 
+        array(
+            'class' => 'btn btn-danger',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal' )) }}
+
+    {{ Form::close() }}
+</div>
 
 <div class="clearfix"></div>
 
@@ -67,6 +82,7 @@
                         <th>Activities</th>
                         <th>Health warning</th>
                         <th>Order</th>
+                        <th>Team</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,6 +113,7 @@
                                 $parameters = array( 'id' => $child->order->id), 
                                 $attributes = array( 'class' => '')) }}
                         </td>
+                        <td>{{{ $child->team_name() }}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -108,3 +125,41 @@
 <div class="pull-right">
     {{ $children->links() }}
 </div>
+
+
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="text-danger" style="font-size: 2em;">
+                    <span class="glyphicon glyphicon-warning-sign"></span> Warning
+                </p>
+                <p>
+                    You are about to assign children to teams using an automatic, round-robin
+                    approach. This will overwrite current team assignments for all children
+                    except those who have been explicitly placed with friends.
+                    Are you sure you want to continue?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No, cancel</button>
+                <button type="button" id="continue" class="btn btn-danger">Yes, continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section('extra_js')
+
+<script type="text/javascript">
+    
+    $('#continue').click(function() {
+        $('form.assign').submit();
+    });
+    
+</script>
+
+@endsection

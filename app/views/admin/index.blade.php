@@ -93,7 +93,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                 <ul class="list-group">
                     <li class="list-group-item"><h4>T-Shirts</h4></li>
                     <li class="list-group-item">
@@ -101,7 +101,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                 <ul class="list-group">
                     <li class="list-group-item"><h4>Extra payments &amp; discounts</h4></li>
                     <li class="list-group-item"><span class="badge money">£{{{ money_format('%#5i', $extra_payments) }}}</span> Extra payments</li>
@@ -109,9 +109,13 @@
                     <li class="list-group-item list-group-item-{{ $extra_payments >= $discounts ? 'success' : 'danger' }}"><span class="badge money">£{{{ money_format('%#5i', $extra_payments - $discounts) }}}</span> Balance</li>
                 </ul>
             </div>
-            <div class="col-sm-6 col-md-3">
-            </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item"><h4>Children by team</h4></li>
+                    <li class="list-group-item">
+                        <canvas id="childrenByTeamChart" width="50" height="50"></canvas>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -308,6 +312,45 @@ var tshirtChart = new Chart(ctxTshirtChart, {
         }]
     },
     options: {}
+});
+
+var ctxChildrenByTeamChart = document.getElementById("childrenByTeamChart");
+var childrenByTeamChart = new Chart(ctxChildrenByTeamChart, {
+    type: 'pie',
+    data: {
+        labels: {{ json_encode(array_keys($children_by_team)) }},
+        datasets: [
+        {
+            data: {{ json_encode(array_values($children_by_team)) }},
+            backgroundColor: [
+                colours["red"]["normal"],
+                colours["blue"]["normal"],
+                colours["orange"]["normal"],
+                colours["green"]["normal"],
+                colours["purple"]["normal"],
+                colours["yellow"]["normal"],
+                colours["brown"]["normal"],
+                colours["pink"]["normal"],
+                colours["gray"]["normal"]
+            ],
+            hoverBackgroundColor: [
+                colours["red"]["highlight"],
+                colours["blue"]["highlight"],
+                colours["orange"]["highlight"],
+                colours["green"]["highlight"],
+                colours["purple"]["highlight"],
+                colours["yellow"]["highlight"],
+                colours["brown"]["highlight"],
+                colours["pink"]["highlight"],
+                colours["gray"]["highlight"]
+            ]
+        }]
+    },
+    options: {
+        legend: {
+            fullWidth: true
+        }
+    }
 });
 
 </script>

@@ -4,6 +4,8 @@ namespace Admin;
 
 use Child;
 
+use Carbon\Carbon;
+
 use Input;
 use Redirect;
 use Session;
@@ -18,10 +20,11 @@ class ChildController extends AdminBaseController {
     //
     public function index()
     {
-        $children = Child::confirmed()
-                        ->with('order')
-                        ->orderBy('last_name')
-                        ->orderBy('first_name');
+        $children = 
+            Child::confirmed()
+                ->with('order')
+                ->orderBy('last_name')
+                ->orderBy('first_name');
 
         $filtered = false;
         $filter_name   = Session::get('admin_child_filter_name',   '');
@@ -72,5 +75,55 @@ class ChildController extends AdminBaseController {
         return Redirect::route('admin.child.index');
     }
 
+
+    //
+    // Assigns children to teams
+    //
+    public function assignTeams()
+    {
+        $today = Carbon::today();
+        $start_date = Carbon::create(2016, 8, 3);
+
+        if ($today->gte($start_date)) {
+            return 
+                Redirect::route('admin.child.index')
+                    ->withMessage("Sorry, it's too late to mass assign teams now!");
+        }
+
+        $dancers = 
+            Child::confirmed()
+                ->canBeAssignedToTeam()
+                ->dancing()
+                ->orderBy('date_of_birth')
+                ->get();
+
+        $this->assignChildrenToTeams($dancers);
+
+        $non_dancers = 
+            Child::confirmed()
+                ->canBeAssignedToTeam()
+                ->notDancing()
+                ->orderBy('date_of_birth')
+                ->get();
+
+        $this->assignChildrenToTeams($non_dancers);
+
+        return 
+            Redirect::route('admin.child.index')
+                ->withInfo('Teams assigned successfully');
+    }
+
+    // Helper method
+    private function assignChildrenToTeams($children)
+    {
+        $teams = array_keys(Child::$teams);
+        $team_count = count($teams);
+        $team  = 0;
+        foreach ($children as $child) {
+            $child->team = $teams[$team % $team_count];
+            $child->save();
+            $team = $team + 1;
+        }
+    }
 
 }

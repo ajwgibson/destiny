@@ -114,9 +114,10 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get(   'voucher/{id}',         array('as' => 'admin.voucher.show',           'uses' => 'VoucherController@show'));
     Route::delete('voucher/{id}/destroy', array('as' => 'admin.voucher.destroy',        'uses' => 'VoucherController@destroy'));
 
-    Route::post(  'child/filter',       array('as' => 'admin.child.filter',         'uses' => 'ChildController@filter'));
-    Route::get(   'child/resetFilter',  array('as' => 'admin.child.filter.reset',   'uses' => 'ChildController@resetFilter'));
-    Route::get(   'child',              array('as' => 'admin.child.index',          'uses' => 'ChildController@index'));
+    Route::post('child/filter',       array('as' => 'admin.child.filter',         'uses' => 'ChildController@filter'));
+    Route::get( 'child/resetFilter',  array('as' => 'admin.child.filter.reset',   'uses' => 'ChildController@resetFilter'));
+    Route::get( 'child',              array('as' => 'admin.child.index',          'uses' => 'ChildController@index'));
+    Route::post('child/assignTeams',  array('as' => 'admin.child.assign',         'uses' => 'ChildController@assignTeams'));
     
 });
 
