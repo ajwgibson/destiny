@@ -58,6 +58,18 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| Global "bcc" Address
+	|--------------------------------------------------------------------------
+	|
+	| Important emails like order confirmations will be blind copied to the
+	| following email address.
+	|
+	*/
+
+	'bcc' => 'ccvdestinyisland@gmail.com',
+
+	/*
+	|--------------------------------------------------------------------------
 	| E-Mail Encryption Protocol
 	|--------------------------------------------------------------------------
 	|

@@ -480,7 +480,7 @@ class OrderController extends BaseController {
                     function($message) use($order) {
                         $message
                             ->to($order->email)
-                            ->cc(Config::get('mail.from')['address'])
+                            ->bcc(Config::get('mail.bcc'))
                             ->subject('Destiny Island Order Confirmation');
                     });
 
