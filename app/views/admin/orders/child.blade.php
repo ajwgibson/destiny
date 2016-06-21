@@ -61,10 +61,10 @@
                     {{ Form::label('tshirt', 'T-shirt size', array ('class' => 'control-label')) }}
                     {{ Form::select(
                             'tshirt', 
-                            array ( ''       => 'Select a size...',
-                                    'SMALL'  => 'SMALL',
-                                    'MEDIUM' => 'MEDIUM',
-                                    'LARGE'  => 'LARGE' ), 
+                            array ( ''              => 'Select a size...',
+                                    'Small (5-6)'   => 'Small (5-6)',
+                                    'Medium (7-8)'  => 'Medium (7-8)',
+                                    'Large (9-11)'  => 'Large (9-11)' ), 
                             null, 
                             array ('class' => 'form-control')) }}
                 </div>
