@@ -117,7 +117,7 @@ class VoucherController extends AdminBaseController {
         $voucher = new Voucher();
         $voucher->batch_size  = 10;
         $voucher->discount    = 50;
-        $voucher->child_limit = 5;
+        $voucher->child_limit = 3;
 
         $this->layout->with('title',    $this->title);
         $this->layout->with('subtitle', "add new vouchers");
