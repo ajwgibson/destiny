@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'sendmail',
+	'driver' => 'smtp',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => getenv('DESTINY_EMAIL_HOST'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'port' => 587,
+	'port' => getenv('DESTINY_EMAIL_PORT'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,19 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'kids@causewaycoastvineyard.com', 'name' => 'Destiny Island'),
-
-	/*
-	|--------------------------------------------------------------------------
-	| Global "bcc" Address
-	|--------------------------------------------------------------------------
-	|
-	| Important emails like order confirmations will be blind copied to the
-	| following email address.
-	|
-	*/
-
-	'bcc' => 'ccvdestinyisland@gmail.com',
+	'from' => array('address' => getenv('DESTINY_EMAIL_ADDRESS'), 'name' => 'Destiny Island'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -92,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => getenv('DESTINY_EMAIL_USERNAME'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -105,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => getenv('DESTINY_EMAIL_PASSWORD'),
 
 	/*
 	|--------------------------------------------------------------------------
