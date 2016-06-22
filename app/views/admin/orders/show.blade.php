@@ -1,5 +1,31 @@
 <div class="col-xs-8 order-summary">
+
+    @if (isset($order->verification_code))
+    <div class="text-danger">
+        <h3><span class="glyphicon glyphicon-exclamation-sign"></span> Verification code</h3>
+        <dl class="dl-horizontal">
+            <dt>#</dt> 
+            <dd>
+                <span class="h4 name">{{ $order->verification_code }}</span>
+                
+            </dd>
+        </dl>
+    </div>
+    <dl class="dl-horizontal">
+        <dt></dt>
+        <dd>
+            The URL needed by the customer to resume this transaction with the verification code shown above is: 
+            {{  link_to_route(
+                    'order.verification', 
+                    route('order.verification', $order->transaction_id), 
+                    $parameters = array( $order->transaction_id), 
+                    $attributes = array( 'class' => '')) }}
+        </dd>
+    </dl>
+    @endif
+
     @include('orders/_summary')
+
 </div>
 
 <div class="col-sm-4 edit_delete_panel">
