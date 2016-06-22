@@ -121,4 +121,15 @@ return array(
 
 	'pretend' => false,
 
+	/*
+	|--------------------------------------------------------------------------
+	| Global "bcc" Address
+	|--------------------------------------------------------------------------
+	|
+	| Important emails like order confirmations will be blind copied to the
+	| following email address.
+	|
+	*/
+	'bcc' => 'kids@causewaycoastvineyard.com',
+
 );

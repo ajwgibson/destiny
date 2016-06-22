@@ -68,6 +68,7 @@ class OrderController extends BaseController {
                 function($message) use($order) {
                     $message
                         ->to($order->email)
+                        ->bcc(Config::get('mail.bcc'))
                         ->subject('Destiny Island email address verification');
                 });
 
@@ -133,6 +134,7 @@ class OrderController extends BaseController {
                 function($message) use($order) {
                     $message
                         ->to($order->email)
+                        ->bcc(Config::get('mail.bcc'))
                         ->subject('Destiny Island');
                 });
 
@@ -481,6 +483,7 @@ class OrderController extends BaseController {
                     function($message) use($order) {
                         $message
                             ->to($order->email)
+                            ->bcc(Config::get('mail.bcc'))
                             ->subject('Destiny Island Order Confirmation');
                     });
 
