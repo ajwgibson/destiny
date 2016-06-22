@@ -462,11 +462,12 @@ class OrderController extends BaseController {
 
                 $charge = \Stripe\Charge::create(
                     array(
-                        "amount"      => $order->total_pence(),
-                        "currency"    => "gbp",
-                        "source"      => $token,
-                        "description" => "Destiny Island Booking for " . $order->name(),
-                        "metadata"    => array("order_id" => $transaction_id)
+                        "amount"        => $order->total_pence(),
+                        "currency"      => "gbp",
+                        "source"        => $token,
+                        "description"   => "Destiny Island Booking for " . $order->name(),
+                        "metadata"      => array("order_id" => $transaction_id),
+                        "receipt_email" => $order->email
                     ));
 
                 $order->status = Order::StatusComplete;
