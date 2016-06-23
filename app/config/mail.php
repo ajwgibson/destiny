@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => getenv('DESTINY_EMAIL_DRIVER'),
 
 	/*
 	|--------------------------------------------------------------------------
