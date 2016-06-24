@@ -32,7 +32,7 @@ class Child extends Eloquent {
         'last_name'          => 'required|max:100',
         'date_of_birth'      => 'required|date|after:05-08-2004|before:04-08-2011',
         'tshirt'             => 'required',
-        'school_year'        => 'required|integer|between:2,8',
+        'school_year'        => 'required|integer|between:1,8',
         'notes'              => 'required_with:health_warning',
         'activity_choice_1'  => 'required_without:dancing',
         'activity_choice_2'  => 'required_without:dancing',
@@ -43,8 +43,7 @@ class Child extends Eloquent {
         'tshirt.required'      => "The T-shirt size field is required.",
         'date_of_birth.after'  => "Children must be under 12.",
         'date_of_birth.before' => "Children must be 5 or older.",
-        'school_year.min'      => "Children should be starting P2 or above.",
-        'school_year.max'      => "Children should be starting Y8 or lower.",
+        'school_year.between'  => "Children should be between P1 and Y8.",
         'activity_choice_1.required_without'  => "Activity choices are required for children not picking the dancing activity",
         'activity_choice_2.required_without'  => "Activity choices are required for children not picking the dancing activity",
         'activity_choice_3.required_without'  => "Activity choices are required for children not picking the dancing activity",
@@ -53,6 +52,7 @@ class Child extends Eloquent {
 
     public static $school_years = array( 
         '' => 'Select a school year...',
+        1  => 'Primary 1 (Age 5)',
         2  => 'Primary 2 (Ages 5-6)',
         3  => 'Primary 3 (Ages 6-7)',
         4  => 'Primary 4 (Ages 7-8)',
@@ -63,6 +63,7 @@ class Child extends Eloquent {
     );
 
     public static $short_school_years = array( 
+        1  => 'Primary 1',
         2  => 'Primary 2',
         3  => 'Primary 3',
         4  => 'Primary 4',
