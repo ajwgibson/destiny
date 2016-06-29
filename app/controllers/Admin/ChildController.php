@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Input;
 use Redirect;
 use Session;
+use Validator;
 use View;
 
 class ChildController extends AdminBaseController {
@@ -73,6 +74,73 @@ class ChildController extends AdminBaseController {
         if (Session::has('admin_child_filter_name'))   Session::forget('admin_child_filter_name');
 
         return Redirect::route('admin.child.index');
+    }
+
+
+    //
+    // Shows the details of a child
+    //
+    public function show($id)
+    {
+        $child = Child::findOrFail($id);
+
+        $this->layout->with('title',    $this->title);
+        $this->layout->with('subtitle', "details for {$child->name()}");
+
+        $this->layout->content =
+            View::make('admin/children/show')
+                ->with('child', $child);
+    }
+
+
+    //
+    // Shows the form to edit a child
+    //
+    public function edit($id)
+    {
+        $child = Child::findOrFail($id);
+
+        $this->layout->with('title',    $this->title);
+        $this->layout->with('subtitle', "edit details for {$child->name()}");
+
+        $this->layout->content =
+            View::make('admin/children/edit')
+                ->with('child',  $child);
+    }
+
+
+    //
+    // Updates a child
+    //
+    public function update($id)
+    {
+        $child = Child::findOrFail($id);
+
+        $input = Input::all();
+
+        $validator = Validator::make($input, Child::$validation_rules, Child::$validation_messages);
+
+        if ($validator->fails()) {
+            return 
+                Redirect::route('admin.child.edit', array($id))
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        if (!Input::has('health_warning')) $input['health_warning'] = 0;
+        if (!Input::has('sleepover'))      $input['sleepover'] = 0;
+
+        if (Input::has('dancing')) {
+            $input['activity_choice_1'] = 'Dancing';
+            $input['activity_choice_2'] = 'Dancing';
+            $input['activity_choice_3'] = 'Dancing';
+        } else {
+            $input['dancing'] = 0;
+        } 
+
+        $child->update($input);
+
+        return Redirect::route('admin.child.show', array($id));
     }
 
 

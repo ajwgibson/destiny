@@ -92,6 +92,13 @@ class OrderController extends AdminBaseController {
         $this->layout->with('title',    $this->title);
         $this->layout->with('subtitle', "order details for {$order->name()}");
 
+        if ($order->amount_paid > 0 && $order->amount_paid != $order->total()) {
+            $this->layout->with(
+                'message', 
+                "The amount paid for this order (£" . money_format('%(i', $order->amount_paid) . ") " .
+                "doesn't match the cost (£" . money_format('%(i', $order->total()) . ")");
+        }
+
         $this->layout->content =
             View::make('admin/orders/show')
                 ->with('order', $order);

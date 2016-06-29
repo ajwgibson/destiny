@@ -83,6 +83,7 @@
                         <th>Health warning</th>
                         <th>Order</th>
                         <th>Team</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,6 +115,13 @@
                                 $attributes = array( 'class' => '')) }}
                         </td>
                         <td>{{{ $child->team_name() }}}</td>
+                        <td>
+                            {{ link_to_route(
+                                'admin.child.show', 
+                                'Show details', 
+                                $parameters = array( 'id' => $child->id), 
+                                $attributes = array( 'class' => '')) }}
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

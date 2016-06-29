@@ -23,6 +23,30 @@
 
     @include('orders/_summary')
 
+    @if ($order->amount_paid > 0)
+    <div class="hidden-print">
+        <h3><span class="glyphicon glyphicon-shopping-cart"> </span> Payment details</h3>
+        <dl class="dl-horizontal">
+            <dt>Cost</dt>     <dd>£{{ money_format('%i', $order->amount_due) }}</dd>
+            
+            <dt>Discount</dt> 
+            <dd>£{{ money_format('%i', $order->discount) }}
+            @if ($order->voucher)
+                <code>{{{ $order->voucher->code }}}</code>
+            @endif
+            </dd>
+            <dt>Extra</dt>    <dd>£{{ money_format('%i', $order->amount_extra) }}</dd>
+            <dt>Paid</dt>     <dd>£{{ money_format('%i', $order->amount_paid) }}</dd>
+            <dt>Stripe id</dt>
+            @if ($order->stripe_charge_id)
+                <dd>{{ $order->stripe_charge_id }}</dd>
+            @else
+                <dd><i>Cash payment</i></dd>
+            @endif
+        </dl>
+    </div>
+    @endif
+
 </div>
 
 <div class="col-sm-4 edit_delete_panel">
