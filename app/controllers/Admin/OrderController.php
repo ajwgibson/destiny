@@ -22,7 +22,7 @@ class OrderController extends AdminBaseController {
     //
     public function index()
     {
-        $orders = Order::orderBy('status')->orderBy('created_at', 'DESC');
+        $orders = Order::orderBy('status')->orderBy('updated_at', 'DESC');
 
         $filtered = false;
         $filter_name  = Session::get('admin_order_filter_name',  '');
