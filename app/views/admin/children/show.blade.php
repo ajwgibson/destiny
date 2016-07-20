@@ -54,6 +54,9 @@
                 <i>Not used yet</i>
             @endif
         </dd>
+
+        <dt>Team</dt>
+        <dd>{{{ $child->team_name() }}}</dd>
     </dl>
         
 </div>
