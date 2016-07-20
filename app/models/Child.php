@@ -136,7 +136,8 @@ class Child extends Eloquent {
 
         return 
             $query->whereNull('friend_id')
-                  ->whereNotIn('id', $friends);
+                  ->whereNotIn('id', $friends)
+                  ->whereHas('registrations', function() {}, '<', 1);
     }
 
 
