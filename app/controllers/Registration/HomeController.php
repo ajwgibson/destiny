@@ -139,5 +139,5 @@ class HomeController extends RegistrationBaseController {
             $this->layout->errors = $validator->messages();
         }
     }
-
+    
 }

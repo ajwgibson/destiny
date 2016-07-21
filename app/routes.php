@@ -122,6 +122,13 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get( 'child/{id}/edit',    array('as' => 'admin.child.edit',           'uses' => 'ChildController@edit'));
     Route::post('child/{id}/update',  array('as' => 'admin.child.update',         'uses' => 'ChildController@update'));
     
+    Route::get(   'registration',              array('as' => 'admin.registration.index',       'uses' => 'RegistrationController@index'));  
+    Route::post(  'registration/filter',       array('as' => 'admin.registration.filter',      'uses' => 'RegistrationController@filter'));
+    Route::get(   'registration/resetfilter',  array('as' => 'admin.registration.resetfilter', 'uses' => 'RegistrationController@resetFilter'));
+    Route::get(   'registration/{id}',         array('as' => 'admin.registration.show',        'uses' => 'RegistrationController@show'));
+    Route::get(   'registration/{id}/edit',    array('as' => 'admin.registration.edit',        'uses' => 'RegistrationController@edit'));
+    Route::put(   'registration/{id}/update',  array('as' => 'admin.registration.update',      'uses' => 'RegistrationController@update'));
+    Route::delete('registration/{id}/destroy', array('as' => 'admin.registration.destroy',     'uses' => 'RegistrationController@destroy'));
 });
 
 
@@ -130,10 +137,10 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
 */
 Route::group(array('prefix' => 'registration', 'namespace' => 'Registration', 'before' => 'auth.registration'), function()
 {
-    Route::get( '/',                  array('as' => 'registration.home',     'uses' => 'HomeController@index'));
-    Route::post('/search',            array('as' => 'registration.search',   'uses' => 'HomeController@search'));
-    Route::post('/register',          array('as' => 'registration.register', 'uses' => 'HomeController@register'));
-    Route::get( '/registration/{id}', array('as' => 'registration.show',     'uses' => 'HomeController@show'));
+    Route::get( '/',         array('as' => 'registration.home',     'uses' => 'HomeController@index'));
+    Route::post('/search',   array('as' => 'registration.search',   'uses' => 'HomeController@search'));
+    Route::post('/register', array('as' => 'registration.register', 'uses' => 'HomeController@register'));
 
     Route::get('printLabel/{child_id}/{return_url}',  array('as' => 'print.label', 'uses' => 'PrintoutController@printLabel'));
+
 });
