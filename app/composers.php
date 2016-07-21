@@ -4,8 +4,6 @@ View::composer(array('registration/index'), function($view)
 {
     $expected = Child::get()->count();
 
-    Log::debug('Expected = ' . $expected);
-
     $wednesday = Registration::where(DB::raw('DAYOFWEEK(registrations.created_at)'), '=', 4)->count();
     $thursday  = Registration::where(DB::raw('DAYOFWEEK(registrations.created_at)'), '=', 5)->count();
     $friday    = Registration::where(DB::raw('DAYOFWEEK(registrations.created_at)'), '=', 6)->count();
