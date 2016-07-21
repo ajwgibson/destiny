@@ -43,8 +43,7 @@
                     @if (Auth::check())
                         <li class="">{{ link_to_route('registration.home', 'REGISTRATION') }}</li>
                         @if (Auth::user()->admin)
-                            <li class="">{{ link_to_route('admin.home', 'ADMIN') }}</li>
-                            <li class="">{{ link_to_route('admin.user.index', 'USERS') }}</li>
+                            @include('layouts/_admin_menu')
                         @endif
                         <li class="">{{ link_to_route('logout', 'LOGOUT') }}</li>
                     @endif

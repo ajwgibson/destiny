@@ -42,13 +42,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
                         <li class="">{{ link_to_route('registration.home', 'REGISTRATION') }}</li>
-                        <li class="">{{ link_to_route('admin.home', 'DASHBOARD') }}</li>
-                        <li class="">{{ link_to_route('admin.registration.index', 'REGISTRATIONS') }}</li>
-                        <li class="">{{ link_to_route('admin.order.index', 'ORDERS') }}</li>
-                        <li class="">{{ link_to_route('admin.child.index', 'CHILDREN') }}</li>
-                        <li class="">{{ link_to_route('admin.voucher.index', 'VOUCHERS') }}</li>
-                        <li class="">{{ link_to_route('admin.faq.index', 'FAQS') }}</li>
-                        <li class="">{{ link_to_route('admin.user.index', 'USERS') }}</li>
+
+                        @include('layouts/_admin_menu')
+                        
                         <li class="">{{ link_to_route('logout', 'LOGOUT') }}</li>
                         @endif
                     </ul>
