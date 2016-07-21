@@ -121,6 +121,8 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get( 'child/{id}',         array('as' => 'admin.child.show',           'uses' => 'ChildController@show'));
     Route::get( 'child/{id}/edit',    array('as' => 'admin.child.edit',           'uses' => 'ChildController@edit'));
     Route::post('child/{id}/update',  array('as' => 'admin.child.update',         'uses' => 'ChildController@update'));
+    Route::get( 'child/{id}/team',    array('as' => 'admin.child.team',           'uses' => 'ChildController@team'));
+    Route::post('child/{id}/team',    array('as' => 'admin.child.team.do',        'uses' => 'ChildController@updateTeam'));
     
     Route::get(   'registration',              array('as' => 'admin.registration.index',       'uses' => 'RegistrationController@index'));  
     Route::post(  'registration/filter',       array('as' => 'admin.registration.filter',      'uses' => 'RegistrationController@filter'));

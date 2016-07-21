@@ -73,6 +73,14 @@
             $attributes = array( 'class' => 'btn btn-primary')) }}
     </div>
 
+    <div class="action">
+        {{ link_to_route(
+            'admin.child.team', 
+            'Change team', 
+            $parameters = array( 'id' => $child->id), 
+            $attributes = array( 'class' => 'btn btn-info')) }}
+    </div>
+
 </div>
 
 

@@ -145,6 +145,41 @@ class ChildController extends AdminBaseController {
 
 
     //
+    // Change the team a child is assigned to
+    //
+    public function team($id)
+    {
+        $child = Child::findOrFail($id);
+
+        $this->layout->with('title',    $this->title);
+        $this->layout->with('subtitle', "change team for {$child->name()}");
+
+        $this->layout->content =
+            View::make('admin/children/team')
+                ->with('child',  $child)
+                ->with('teams', array(0  => 'Not assigned yet') + Child::$teams);
+    }
+
+
+    //
+    // Updates the team a child is assigned to
+    //
+    public function updateTeam($id)
+    {
+        $child = Child::findOrFail($id);
+
+        $team = Input::get('team');
+        
+        if ($team == 0) $team = null;
+
+        $child->team = $team;
+        $child->save();
+
+        return Redirect::route('admin.child.show', array($id));
+    }
+
+
+    //
     // Assigns children to teams
     //
     public function assignTeams()
