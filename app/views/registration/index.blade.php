@@ -74,17 +74,24 @@
                                 <dd>{{ nl2br($todays_registration->notes) }}</dd>
                             </dl>
 
+                            @if (Auth::user()->admin)
                             <p>
                                 If you think that is an error, please use 
 
                                 {{ link_to_route(
-                                    'registration.show', 
+                                    'admin.registration.show', 
                                     'this link', 
                                     $parameters = array( 'id' => $todays_registration->id), 
                                     $attributes = array( 'class' => '')) }}
 
                                 to view the registration record and amend or remove it.
                             </p>
+                            @else
+                            <p>
+                                If you think that is an error, please ask an administrator
+                                to amend or remove the registration as appropriate.
+                            </p>
+                            @endif
 
                             @else
 

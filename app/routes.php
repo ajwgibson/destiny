@@ -131,6 +131,14 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get(   'registration/{id}/edit',    array('as' => 'admin.registration.edit',        'uses' => 'RegistrationController@edit'));
     Route::put(   'registration/{id}/update',  array('as' => 'admin.registration.update',      'uses' => 'RegistrationController@update'));
     Route::delete('registration/{id}/destroy', array('as' => 'admin.registration.destroy',     'uses' => 'RegistrationController@destroy'));
+
+    Route::get('teamPrintout/{day?}/{team?}',   array('as' => 'printout.team',   'uses' => 'PrintoutController@teamPrintout'));
+    Route::post('doTeamPrintout',               array('as' => 'doTeamPrintout',  'uses' => 'PrintoutController@doTeamPrintout'));
+
+    Route::get('activityPrintout/{day?}/{activity?}', array('as' => 'printout.activity',   'uses' => 'PrintoutController@activityPrintout'));
+    Route::post('doActivityPrintout',                 array('as' => 'doActivityPrintout',  'uses' => 'PrintoutController@doActivityPrintout'));
+    
+    Route::get('printLeadersLabel',  array('as' => 'printLeadersLabel', 'uses' => 'PrintoutController@printLeadersLabel'));
 });
 
 

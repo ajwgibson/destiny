@@ -47,7 +47,9 @@ hr {
 @media print {
   
   #main-content {
-    padding-top: 0px !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
   
   .dl-horizontal {
@@ -88,5 +90,24 @@ hr {
     
     page-break-inside: avoid;
   }
+
+  table { 
+        
+    page-break-inside: auto; 
+
+    tr { 
+      page-break-inside: avoid; 
+      page-break-after: auto; 
+    }
+
+    thead { 
+      display: table-header-group; 
+    }
+
+    tfoot { 
+      display: table-footer-group; 
+    }
+  }
   
 }
+

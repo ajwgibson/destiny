@@ -249,4 +249,16 @@ class Child extends Eloquent {
         else return Child::$teams[$team];
     }
 
+    // Returns the activities in a single, comma separated string
+    public function activities()
+    {
+        return $this->activity_choice_1 . ', ' . $this->activity_choice_2 . ', ' . $this->activity_choice_3;
+    }
+
+    // Returns the activities in a single, newline separated string
+    public function label_activities()
+    {
+        return $this->activity_choice_1 . '\n' . $this->activity_choice_2 . '\n' . $this->activity_choice_3;
+    }
+
 }
