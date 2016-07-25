@@ -73,7 +73,10 @@ class PrintoutController extends AdminBaseController {
     //
     public function printLeadersLabel()
     {
-        // TODO
+        $this->layout->with('title', 'Printing');
+        $this->layout->with('subtitle', 'print a label for a leader');
+        $this->layout->content = 
+            View::make('admin/printouts/leaders-label');
     }
 
 }
