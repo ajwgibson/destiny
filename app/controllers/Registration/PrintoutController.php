@@ -11,7 +11,7 @@ class PrintoutController extends RegistrationBaseController {
 
     public function printLabel($child_id, $return_url)
     {
-        $booking = Child::findOrFail($child_id);
+        $child = Child::findOrFail($child_id);
 
         $this->layout->with('title',    'label printing');
         $this->layout->with('subtitle', "{$child->name()}");

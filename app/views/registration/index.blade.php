@@ -47,11 +47,15 @@
                                 <dt>Age</dt>
                                 <dd>{{{ $child->age() }}}</dd>
                                 <dt>School year (in September)</dt>
-                                <dd>{{{ $child->school_year }}}</dd>
-                                <dt>Dance activity</dt>
-                                <dd>{{ HTML::yes_no_icon($child->dancing) }}</dd>
+                                <dd>{{{ $child->school_year() }}}</dd>
+                                <dt>Activity choices</dt>
+                                <dd>{{ $child->activities() }}</dd>
                                 <dt>Destiny HighLand</dt>
                                 <dd>{{ HTML::yes_no_icon($child->sleepover) }}</dd>
+                                <dt>Photos</dt>
+                                <dd>{{ HTML::yes_no_icon($child->order->photos_permitted) }}</dd>
+                                <dt>Outings</dt>
+                                <dd>{{ HTML::yes_no_icon($child->order->outings_permitted) }}</dd>
                             </dl>
                         </div>
 
@@ -64,8 +68,8 @@
                             <p>{{{ $child->name() }}} has already been registered today with the following details:</p>
 
                             <dl>
-                                <dt>Registration time</dt>
-                                <dd>{{{ $todays_registration->created_at->format('g:sa') }}}</dd>
+                                <dt>Registration date &amp;time</dt>
+                                <dd>{{{ Destiny\ViewHelper::london_time($todays_registration->created_at) }}}</dd>
                                 <dt>Contact name</dt>
                                 <dd>{{{ $todays_registration->contact_name }}}</dd>
                                 <dt>Contact number</dt>

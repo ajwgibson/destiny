@@ -252,13 +252,24 @@ class Child extends Eloquent {
     // Returns the activities in a single, comma separated string
     public function activities()
     {
-        return $this->activity_choice_1 . ', ' . $this->activity_choice_2 . ', ' . $this->activity_choice_3;
+        if ($this->dancing) return $this->activity_choice_1;
+        else return $this->activity_choice_1 . ', ' . $this->activity_choice_2 . ', ' . $this->activity_choice_3;
     }
 
     // Returns the activities in a single, newline separated string
     public function label_activities()
     {
-        return $this->activity_choice_1 . '\n' . $this->activity_choice_2 . '\n' . $this->activity_choice_3;
+        if ($this->dancing) return $this->activity_choice_1;
+        else return $this->activity_choice_1 . '\n' . $this->activity_choice_2 . '\n' . $this->activity_choice_3;
+    }
+
+    // Returns the name of the label that should be used for this child
+    public function label()
+    {
+        if (!$this->order->photos_permitted && !$this->order->outings_permitted) return 'DestinyIsland-NoExit-NoPhotos.label';
+        if (!$this->order->photos_permitted)  return 'DestinyIsland-NoPhotos.label';
+        if (!$this->order->outings_permitted) return 'DestinyIsland-NoExit.label';
+        return 'DestinyIsland.label';
     }
 
 }

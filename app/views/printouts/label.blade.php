@@ -2,8 +2,14 @@
 <dl class="dl-horizontal">
     <dt>Name</dt>
     <dd>{{{ $child->name() }}}</dd>
-    <dt>Group</dt>
-    <dd>{{{ $child->group_name }}}</dd>
+    <dt>Team</dt>
+    <dd>{{{ $child->team_name() }}}</dd>
+    <dt>Activities</dt>
+    <dd>
+        {{{ $child->activity_choice_1 }}}<br/>
+        {{{ $child->activity_choice_2 }}}<br/>
+        {{{ $child->activity_choice_3 }}}<br/>
+    </dd>
 </dl>
 <p>If a printing error occurs, use one of the following buttons to retry or skip printing.</p>
 <p>
@@ -54,7 +60,7 @@
 
             $.ajax({
                 type:     "GET",
-                url:      "{{ asset('DestinyIsland.label') }}",
+                url:      "{{ asset($child->label()) }}",
                 dataType: "text",
 
                 success: function(data) {
@@ -62,8 +68,8 @@
                     var label = dymo.label.framework.openLabelXml(data);
 
                     label.setObjectText("NAME", "{{{ $child->name() }}}");
-                    label.setObjectText("GROUP", "{{{ $child->group_name }}}");
-                    label.setObjectText("ACTIVITIES", "TODO");
+                    label.setObjectText("GROUP", "{{{ $child->team_name() }}}");
+                    label.setObjectText("ACTIVITIES", "{{{ $child->label_activities() }}}");
 
                     var options = dymo.label.framework.createLabelWriterPrintParamsXml({copies: 2});
 
