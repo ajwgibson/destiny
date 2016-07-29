@@ -277,10 +277,17 @@ class Child extends Eloquent {
     // Returns the name of the label that should be used for this child
     public function label()
     {
-        if (!$this->order->photos_permitted && !$this->order->outings_permitted) return 'DestinyIsland-NoExit-NoPhotos.label';
-        if (!$this->order->photos_permitted)  return 'DestinyIsland-NoPhotos.label';
-        if (!$this->order->outings_permitted) return 'DestinyIsland-NoExit.label';
-        return 'DestinyIsland.label';
+        $flags = '';
+
+        if (!$this->order->outings_permitted) $flags = $flags . 'O';
+        if (!$this->order->photos_permitted)  $flags = $flags . 'P';
+        if ($this->health_warning)            $flags = $flags . 'M';
+
+        if (strlen($flags) > 0) {
+            return 'labels/DestinyIsland-' . $flags . '.label';
+        } else {
+            return 'labels/DestinyIsland.label';
+        }
     }
 
 }
