@@ -57,14 +57,40 @@ class PrintoutController extends AdminBaseController {
     // doing a given activity on a given day - but only the ones who have
     // registered on that day.
     //
-    public function activityPrintout($day = 'monday', $activity = '')
+    public function activityPrintout($team = 1, $activity = 'Dancing')
     {
-        // TODO
+        $this->layout->with('title', 'Printing');
+        $this->layout->with('subtitle', 'activity list');
+
+        $registrations = 
+            Registration::join('children', 'registrations.child_id', '=', 'children.id')
+                ->select('registrations.*')
+                ->where(DB::raw('DATE(registrations.created_at)'), '=', DB::raw('current_date'))
+                ->where('children.team', $team)
+                ->where(function($query) use($activity) {
+                        $query->where('children.activity_choice_1', $activity)
+                              ->orWhere('children.activity_choice_2', $activity)
+                              ->orWhere('children.activity_choice_3', $activity);
+                    })
+                ->orderBy('children.first_name')
+                ->orderBy('children.last_name')
+                ->get();
+
+        $this->layout->content = 
+            View::make('admin/printouts/activity')
+                    ->with('activity', $activity)
+                    ->with('activities', Child::$activities)
+                    ->with('team', $team)
+                    ->with('registrations', $registrations)
+                    ->with('teams', Child::$teams);
     }
 
     public function doActivityPrintout()
     {
-        // TODO
+        $activity  = Input::get('activity');
+        $team      = Input::get('team');
+
+        return Redirect::route('printout.activity', array('activity' => $activity, 'team' => $team));
     }
 
 

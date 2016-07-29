@@ -84,6 +84,17 @@ class Child extends Eloquent {
     );
 
 
+    public static $activities = array( 
+        'Baking'                => 'Baking',
+        'Dancing'               => 'Dancing',
+        'Football at Score FC'  => 'Football at Score FC',
+        'Gardening with Grow'   => 'Gardening with Grow',
+        'Jedi Training (Nerf)'  => 'Jedi Training (Nerf)',
+        'Jewellery Making'      => 'Jewellery Making',
+        'Pod Racing'            => 'Pod Racing',
+    );
+
+
     // Define which properties should be treated as dates
     public function getDates()
     {

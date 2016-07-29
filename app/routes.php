@@ -135,8 +135,8 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::get('teamPrintout/{day?}/{team?}',   array('as' => 'printout.team',   'uses' => 'PrintoutController@teamPrintout'));
     Route::post('doTeamPrintout',               array('as' => 'doTeamPrintout',  'uses' => 'PrintoutController@doTeamPrintout'));
 
-    Route::get('activityPrintout/{day?}/{activity?}', array('as' => 'printout.activity',   'uses' => 'PrintoutController@activityPrintout'));
-    Route::post('doActivityPrintout',                 array('as' => 'doActivityPrintout',  'uses' => 'PrintoutController@doActivityPrintout'));
+    Route::get('activityPrintout/{team?}/{activity?}', array('as' => 'printout.activity',   'uses' => 'PrintoutController@activityPrintout'));
+    Route::post('doActivityPrintout',                  array('as' => 'doActivityPrintout',  'uses' => 'PrintoutController@doActivityPrintout'));
     
     Route::get('printLeadersLabel',  array('as' => 'printLeadersLabel', 'uses' => 'PrintoutController@printLeadersLabel'));
 });
