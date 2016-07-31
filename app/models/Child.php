@@ -77,10 +77,10 @@ class Child extends Eloquent {
     public static $teams = array( 
         1  => 'Team Skywalker',
         2  => 'Team Solo',
-        3  => 'Team Chewbacca',
-        4  => 'Team Rey',
-        5  => 'Team Finn',
-        6  => 'Team Poe',
+        3  => 'Team Chewie',
+        4  => 'Team Yoda',
+        5  => 'Team R2',
+        6  => 'Team BB8',
     );
 
 
