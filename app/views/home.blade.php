@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="row bottom-10">
+    <div class="col-md-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading text-center">
+                <h2>Online booking has now closed!</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="jumbotron">
 
     <h1>Destiny Island</h1>
@@ -30,31 +40,6 @@
         Can't wait to see you!
     </p>
 
-    <p>
-        @if (Session::has('transaction_id'))
-        
-        {{ link_to_route(
-            'order.contact_details', 
-            'Continue your booking', 
-            $parameters = array( Session::get('transaction_id') ), 
-            $attributes = array('class' => 'btn btn-primary btn-lg')) }}
-
-        {{ link_to_route(
-            'order.new', 
-            'Start a new booking', 
-            $parameters = array( ), 
-            $attributes = array('class' => 'btn btn-success btn-lg')) }}            
-
-        @else
-        
-        {{ link_to_route(
-            'order.contact_details', 
-            'Book your place now', 
-            $parameters = array( ), 
-            $attributes = array('class' => 'btn btn-primary btn-lg')) }}
-
-        @endif
-    </p>
 </div>
 
 <div class="row bottom-10">

@@ -9,6 +9,7 @@
 Route::get('/',     array('as' => 'home', 'uses' => 'HomeController@index'));
 Route::get('/faqs', array('as' => 'faqs', 'uses' => 'HomeController@faqs'));
 
+/*
 Route::group(array('prefix' => 'order'), function()
 {
     Route::group(array('before' => 'order_verified'), function()
@@ -51,6 +52,7 @@ Route::group(array('prefix' => 'order'), function()
     Route::get ('verification/{transaction_id}', array('as' => 'order.verification',    'uses' => 'OrderController@verification'));
     Route::post('verification/{transaction_id}', array('as' => 'order.verification.do', 'uses' => 'OrderController@doVerification'));
 });
+*/
 
 /* 
 * Login
