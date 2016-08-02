@@ -71,7 +71,7 @@
                     label.setObjectText("GROUP", "{{{ $child->team_name() }}}");
                     label.setObjectText("ACTIVITIES", "{{{ $child->label_activities() }}}");
 
-                    var options = dymo.label.framework.createLabelWriterPrintParamsXml({copies: 4});
+                    var options = dymo.label.framework.createLabelWriterPrintParamsXml({copies: 2});
 
                     label.print(printers[0].name, options);
 

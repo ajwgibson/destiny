@@ -125,7 +125,7 @@
                             </p>
 
                             <div class="form-group">
-                                <label class="checkbox-inline">{{ Form::checkbox('print_label', true, $child->has_never_registered()) }} Print label</label><br/>
+                                <label class="checkbox-inline">{{ Form::checkbox('print_label', true, true) }} Print label</label><br/>
                             </div>
                             
                             <div class="form-group">
