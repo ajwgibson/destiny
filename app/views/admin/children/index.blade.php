@@ -9,22 +9,6 @@
     </a>
 </div>
 
-<div>
-    {{ Form::open(
-        array(
-            'route' => array('admin.child.assign'),
-            'class' => 'assign' ) ) }}
-
-    {{ Form::button(
-        'Assign children to teams', 
-        array(
-            'class' => 'btn btn-danger',
-            'data-toggle' => 'modal',
-            'data-target' => '#modal' )) }}
-
-    {{ Form::close() }}
-</div>
-
 <div class="clearfix"></div>
 
 

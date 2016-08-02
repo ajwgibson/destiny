@@ -119,7 +119,7 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
     Route::post('child/filter',       array('as' => 'admin.child.filter',         'uses' => 'ChildController@filter'));
     Route::get( 'child/resetFilter',  array('as' => 'admin.child.filter.reset',   'uses' => 'ChildController@resetFilter'));
     Route::get( 'child',              array('as' => 'admin.child.index',          'uses' => 'ChildController@index'));
-    Route::post('child/assignTeams',  array('as' => 'admin.child.assign',         'uses' => 'ChildController@assignTeams'));
+    //Route::post('child/assignTeams',  array('as' => 'admin.child.assign',         'uses' => 'ChildController@assignTeams'));
     Route::get( 'child/{id}',         array('as' => 'admin.child.show',           'uses' => 'ChildController@show'));
     Route::get( 'child/{id}/edit',    array('as' => 'admin.child.edit',           'uses' => 'ChildController@edit'));
     Route::post('child/{id}/update',  array('as' => 'admin.child.update',         'uses' => 'ChildController@update'));
