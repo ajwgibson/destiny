@@ -50,7 +50,7 @@
 
 	    	$.ajax({
 				type:     "GET",
-				url:      "{{ asset('DestinyIslandLeader.label') }}",
+				url:      "{{ asset('labels/DestinyIslandLeader.label') }}",
 				dataType: "text",
 
 				success: function(data) {
