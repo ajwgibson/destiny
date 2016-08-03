@@ -41,10 +41,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                     @if (Auth::check())
-                        <li class="">{{ link_to_route('registration.home', 'REGISTRATION') }}</li>
+                        
+                        @include('layouts/_registration_menu')
+                        
                         @if (Auth::user()->admin)
                             @include('layouts/_admin_menu')
                         @endif
+                        
                         <li class="">{{ link_to_route('logout', 'LOGOUT') }}</li>
                     @endif
                     </ul>

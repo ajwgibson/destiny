@@ -139,8 +139,6 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'Admin', 'before' => 'aut
 
     Route::get('activityPrintout/{team?}/{activity?}', array('as' => 'printout.activity',   'uses' => 'PrintoutController@activityPrintout'));
     Route::post('doActivityPrintout',                  array('as' => 'doActivityPrintout',  'uses' => 'PrintoutController@doActivityPrintout'));
-    
-    Route::get('printLeadersLabel',  array('as' => 'printLeadersLabel', 'uses' => 'PrintoutController@printLeadersLabel'));
 });
 
 
@@ -154,5 +152,6 @@ Route::group(array('prefix' => 'registration', 'namespace' => 'Registration', 'b
     Route::post('/register', array('as' => 'registration.register', 'uses' => 'HomeController@register'));
 
     Route::get('printLabel/{child_id}/{return_url}',  array('as' => 'print.label', 'uses' => 'PrintoutController@printLabel'));
-
+    
+    Route::get('printLeadersLabel',  array('as' => 'printLeadersLabel', 'uses' => 'PrintoutController@printLeadersLabel'));
 });

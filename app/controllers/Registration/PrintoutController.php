@@ -22,4 +22,13 @@ class PrintoutController extends RegistrationBaseController {
                 ->with('return_url', $return_url);
     }
 
+
+    public function printLeadersLabel()
+    {
+        $this->layout->with('title', 'Printing');
+        $this->layout->with('subtitle', 'print a label for a leader');
+        $this->layout->content = 
+            View::make('printouts/leaders-label');
+    }
+
 }

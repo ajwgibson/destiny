@@ -93,16 +93,4 @@ class PrintoutController extends AdminBaseController {
         return Redirect::route('printout.activity', array('activity' => $activity, 'team' => $team));
     }
 
-
-    //
-    // Allows an administrator to print a name badge label for a leader
-    //
-    public function printLeadersLabel()
-    {
-        $this->layout->with('title', 'Printing');
-        $this->layout->with('subtitle', 'print a label for a leader');
-        $this->layout->content = 
-            View::make('admin/printouts/leaders-label');
-    }
-
 }
